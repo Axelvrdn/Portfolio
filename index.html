@@ -23,6 +23,14 @@
                         <i data-lucide="code-2"></i>
                         <span>Accueil</span>
                     </a>
+                    <a href="#moi" class="nav-link">
+                        <i data-lucide="user"></i>
+                        <span>Moi</span>
+                    </a>
+                    <a href="#entreprise" class="nav-link">
+                        <i data-lucide="building"></i>
+                        <span>Mon Entreprise</span>
+                    </a>
                     <a href="#parcours" class="nav-link">
                         <i data-lucide="graduation-cap"></i>
                         <span>Parcours</span>
@@ -46,6 +54,14 @@
                 <a href="#accueil" class="nav-link">
                     <i data-lucide="code-2"></i>
                     <span>Accueil</span>
+                </a>
+                <a href="#moi" class="nav-link">
+                    <i data-lucide="user"></i>
+                    <span>Moi</span>
+                </a>
+                <a href="#entreprise" class="nav-link">
+                    <i data-lucide="building"></i>
+                    <span>Mon Entreprise</span>
                 </a>
                 <a href="#parcours" class="nav-link">
                     <i data-lucide="graduation-cap"></i>
@@ -80,6 +96,42 @@
             </div>
         </section>
 
+        <!-- Moi -->
+        <section id="moi" class="section">
+            <div class="container">
+                <h2>Moi</h2>
+                <div class="about-content">
+                    <p class="about-text">
+                        [Votre présentation personnelle ici]
+                    </p>
+                    <a href="assets/cv.pdf" download class="download-btn">
+                        <i data-lucide="download"></i>
+                        Télécharger mon CV
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mon Entreprise -->
+        <section id="entreprise" class="section bg-light">
+            <div class="container">
+                <h2>Mon Entreprise Actuelle</h2>
+                <div class="company-content">
+                    <img src="https://upload.wikimedia.org/wikipedia/fr/d/d6/Logo_Worldline_-_2021.svg" alt="Worldline" class="company-logo" sizes="40px">
+                    <div class="company-info">
+                        <h3>Worldline</h3>
+                        <p class="company-description">
+                            Leader européen du secteur des paiements et des services transactionnels
+                        </p>
+                        <div class="job-info">
+                            <h4>Mon Rôle : Administrateur de Poste de Travail</h4>
+                            <p>[Description de vos responsabilités]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Parcours -->
         <section id="parcours" class="section">
             <div class="container">
@@ -90,9 +142,19 @@
                             <i data-lucide="graduation-cap"></i>
                         </div>
                         <div class="timeline-content">
-                            <h3>BTS SIO SLAM</h3>
+                            <h3>BAC STI2D option SIN</h3>
+                            <p class="date">2020 - 2023</p>
+                            <p>Obtention avec mention BIEN</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i data-lucide="briefcase"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h3>BTS SIO SLAM & Worldline</h3>
                             <p class="date">2023 - Présent</p>
-                            <p>Formation approfondie en développement d'applications</p>
+                            <p>Formation en alternance chez Worldline en tant qu'Administrateur de Poste de Travail</p>
                         </div>
                     </div>
                 </div>
@@ -106,27 +168,27 @@
                 <div class="skills-grid">
                     <div class="skill-card">
                         <h3>PHP</h3>
-                        <canvas class="skill-gauge" data-skill="75"></canvas>
-                    </div>
-                    <div class="skill-card">
-                        <h3>MySQL</h3>
-                        <canvas class="skill-gauge" data-skill="80"></canvas>
-                    </div>
-                    <div class="skill-card">
-                        <h3>C#</h3>
-                        <canvas class="skill-gauge" data-skill="70"></canvas>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Flutter</h3>
-                        <canvas class="skill-gauge" data-skill="65"></canvas>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Python</h3>
                         <canvas class="skill-gauge" data-skill="85"></canvas>
                     </div>
                     <div class="skill-card">
-                        <h3>JavaScript</h3>
+                        <h3>MySQL</h3>
+                        <canvas class="skill-gauge" data-skill="85"></canvas>
+                    </div>
+                    <div class="skill-card">
+                        <h3>C#</h3>
                         <canvas class="skill-gauge" data-skill="90"></canvas>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Flutter</h3>
+                        <canvas class="skill-gauge" data-skill="55"></canvas>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Python</h3>
+                        <canvas class="skill-gauge" data-skill="95"></canvas>
+                    </div>
+                    <div class="skill-card">
+                        <h3>JavaScript</h3>
+                        <canvas class="skill-gauge" data-skill="40"></canvas>
                     </div>
                 </div>
             </div>
@@ -137,7 +199,7 @@
             <div class="container">
                 <h2>Mes Projets</h2>
                 <div class="projects-grid">
-                    <div class="project-card">
+                    <a href="projets/ecommerce.html" class="project-card">
                         <div class="project-image">
                             <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=800&auto=format&fit=crop&q=60" alt="E-commerce">
                         </div>
@@ -150,9 +212,9 @@
                                 <span>Bootstrap</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="project-card">
+                    <a href="projets/mobile-app.html" class="project-card">
                         <div class="project-image">
                             <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&auto=format&fit=crop&q=60" alt="Application Mobile">
                         </div>
@@ -165,9 +227,9 @@
                                 <span>Firebase</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="project-card">
+                    <a href="projets/gestion.html" class="project-card">
                         <div class="project-image">
                             <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=60" alt="Système de Gestion">
                         </div>
@@ -180,7 +242,7 @@
                                 <span>SQL Server</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -190,9 +252,60 @@
             <div class="container">
                 <h2>Épreuve E4</h2>
                 <div class="pdf-container">
-                    <iframe src=".pdf" title="Documentation E4">
+                    <iframe src="PDF/Epreuve E4.pdf" title="Documentation E4">
                         <p>Votre navigateur ne supporte pas l'affichage des PDF.</p>
                     </iframe>
+                </div>
+                <br><br>
+                <div class="competences-grid">
+                    <div class="competence-card">
+                        <h3>Gérer le patrimoine informatique</h3>
+                        <p>[Description de la compétence]</p>
+                        <a href="assets/competences/patrimoine.pdf" class="competence-btn" download>
+                            <i data-lucide="download"></i>
+                            Télécharger le PDF
+                        </a>
+                    </div>
+                    <div class="competence-card">
+                        <h3>Répondre aux incidents</h3>
+                        <p>[Description de la compétence]</p>
+                        <a href="assets/competences/incidents.pdf" class="competence-btn" download>
+                            <i data-lucide="download"></i>
+                            Télécharger le PDF
+                        </a>
+                    </div>
+                    <div class="competence-card">
+                        <h3>Développer la présence en ligne</h3>
+                        <p>[Description de la compétence]</p>
+                        <a href="assets/competences/presence-ligne.pdf" class="competence-btn" download>
+                            <i data-lucide="download"></i>
+                            Télécharger le PDF
+                        </a>
+                    </div>
+                    <div class="competence-card">
+                        <h3>Travailler en mode projet</h3>
+                        <p>[Description de la compétence]</p>
+                        <a href="assets/competences/mode-projet.pdf" class="competence-btn" download>
+                            <i data-lucide="download"></i>
+                            Télécharger le PDF
+                        </a>
+                    </div>
+                    <div class="competence-card">
+                        <h3>Mettre à disposition un service</h3>
+                        <p>[Description de la compétence]</p>
+                        <a href="assets/competences/service.pdf" class="competence-btn" download>
+                            <i data-lucide="download"></i>
+                            Télécharger le PDF
+                        </a>
+                    </div>
+                    <div class="competence-card">
+                        <h3>Organiser son développement</h3>
+                        <p>[Description de la compétence]</p>
+                        <a href="assets/competences/developpement.pdf" class="competence-btn" download>
+                            <i data-lucide="download"></i>
+                            Télécharger le PDF
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
