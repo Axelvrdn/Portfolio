@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio - BTS SIO SLAM</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="container">
+            <div class="nav-content">
+                <h1 class="logo">Portfolio</h1>
+                
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+
+                <div class="nav-links">
+                    <a href="#accueil" class="nav-link active">
+                        <i data-lucide="code-2"></i>
+                        <span>Accueil</span>
+                    </a>
+                    <a href="#parcours" class="nav-link">
+                        <i data-lucide="graduation-cap"></i>
+                        <span>Parcours</span>
+                    </a>
+                    <a href="#competences" class="nav-link">
+                        <i data-lucide="book-open"></i>
+                        <span>Compétences</span>
+                    </a>
+                    <a href="#projets" class="nav-link">
+                        <i data-lucide="briefcase"></i>
+                        <span>Projets</span>
+                    </a>
+                    <a href="#epreuve" class="nav-link">
+                        <i data-lucide="file-text"></i>
+                        <span>Épreuve E4</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mobile-menu">
+                <a href="#accueil" class="nav-link">
+                    <i data-lucide="code-2"></i>
+                    <span>Accueil</span>
+                </a>
+                <a href="#parcours" class="nav-link">
+                    <i data-lucide="graduation-cap"></i>
+                    <span>Parcours</span>
+                </a>
+                <a href="#competences" class="nav-link">
+                    <i data-lucide="book-open"></i>
+                    <span>Compétences</span>
+                </a>
+                <a href="#projets" class="nav-link">
+                    <i data-lucide="briefcase"></i>
+                    <span>Projets</span>
+                </a>
+                <a href="#epreuve" class="nav-link">
+                    <i data-lucide="file-text"></i>
+                    <span>Épreuve E4</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Accueil -->
+        <section id="accueil" class="hero">
+            <div class="container">
+                <h1>Développeur Full Stack</h1>
+                <p>
+                    Étudiant en BTS SIO SLAM passionné par le développement web et mobile.
+                    Je crée des solutions innovantes et intuitives pour répondre aux besoins des utilisateurs.
+                </p>
+            </div>
+        </section>
+
+        <!-- Parcours -->
+        <section id="parcours" class="section">
+            <div class="container">
+                <h2>Mon Parcours</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i data-lucide="graduation-cap"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h3>BTS SIO SLAM</h3>
+                            <p class="date">2022 - Présent</p>
+                            <p>Formation approfondie en développement d'applications</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compétences -->
+        <section id="competences" class="section bg-light">
+            <div class="container">
+                <h2>Mes Compétences</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h3>PHP</h3>
+                        <canvas class="skill-gauge" data-skill="75"></canvas>
+                    </div>
+                    <div class="skill-card">
+                        <h3>MySQL</h3>
+                        <canvas class="skill-gauge" data-skill="80"></canvas>
+                    </div>
+                    <div class="skill-card">
+                        <h3>C#</h3>
+                        <canvas class="skill-gauge" data-skill="70"></canvas>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Flutter</h3>
+                        <canvas class="skill-gauge" data-skill="65"></canvas>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Python</h3>
+                        <canvas class="skill-gauge" data-skill="85"></canvas>
+                    </div>
+                    <div class="skill-card">
+                        <h3>JavaScript</h3>
+                        <canvas class="skill-gauge" data-skill="90"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projets -->
+        <section id="projets" class="section">
+            <div class="container">
+                <h2>Mes Projets</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=800&auto=format&fit=crop&q=60" alt="E-commerce">
+                        </div>
+                        <div class="project-content">
+                            <h3>Application E-commerce</h3>
+                            <p>Développement d'une plateforme e-commerce complète avec PHP et MySQL</p>
+                            <div class="project-tags">
+                                <span>PHP</span>
+                                <span>MySQL</span>
+                                <span>Bootstrap</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&auto=format&fit=crop&q=60" alt="Application Mobile">
+                        </div>
+                        <div class="project-content">
+                            <h3>Application Mobile</h3>
+                            <p>Application mobile de gestion de tâches développée avec Flutter</p>
+                            <div class="project-tags">
+                                <span>Flutter</span>
+                                <span>Dart</span>
+                                <span>Firebase</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=60" alt="Système de Gestion">
+                        </div>
+                        <div class="project-content">
+                            <h3>Système de Gestion</h3>
+                            <p>Application desktop en C# pour la gestion d'inventaire</p>
+                            <div class="project-tags">
+                                <span>C#</span>
+                                <span>.NET</span>
+                                <span>SQL Server</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Épreuve E4 -->
+        <section id="epreuve" class="section bg-light">
+            <div class="container">
+                <h2>Épreuve E4</h2>
+                <div class="pdf-container">
+                    <iframe src=".pdf" title="Documentation E4">
+                        <p>Votre navigateur ne supporte pas l'affichage des PDF.</p>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Mon Portfolio. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
