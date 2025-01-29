@@ -19,27 +19,56 @@
     <main>
         <section class="section">
             <div class="container">
-                <h1>Application Mobile</h1>
+                <h1>Migration W11</h1>
                 <div class="project-details">
-                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&auto=format&fit=crop&q=60" alt="Application Mobile" class="project-hero-image">
+                    <img src="https://images.unsplash.com/photo-1538370621607-4919ce7889b3?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Application Mobile" class="project-hero-image">
                     <div class="project-info">
                         <h2>Description du Projet</h2>
-                        <p>[Description détaillée du projet]</p>
+                        <p>
+                            Le projet visait à migrer les postes de travail de l'organisation vers Windows 11 tout en automatisant la vérification des prérequis système grâce à un script Python. En s'appuyant sur des fichiers exportés depuis Azure, contenant des informations sur les versions des systèmes d'exploitation et l'espace de stockage disponible, le script a permis d'automatiser la validation de la migration et de générer des rapports sur les postes prêts ou nécessitant des ajustements. 
+                            Cette solution a contribué à rationaliser le processus, réduire les erreurs manuelles et assurer une traçabilité complète.
+                        </p>
                         
                         <h2>Technologies Utilisées</h2>
                         <ul class="tech-list">
-                            <li>Flutter</li>
-                            <li>Dart</li>
-                            <li>Firebase</li>
+                            <li>Python (Script d'automatisation)</li>
+                            <li>Pandas (Manipulation des données Excel)</li>
+                            <li>OpenPyXL (Mise en forme des fichiers Excel)</li>
+                            <li>Azure (Source des informations des appareils)</li>
+                            <li>Excel (Support pour les rapports)</li>
                         </ul>
-
+                    
                         <h2>Fonctionnalités Principales</h2>
                         <ul class="feature-list">
-                            <li>[Fonctionnalité 1]</li>
-                            <li>[Fonctionnalité 2]</li>
-                            <li>[Fonctionnalité 3]</li>
+                            <li>Extraction des données depuis un fichier exporté d'Azure (nom des appareils, espace disque, version de l'OS)</li>
+                            <li>Vérification automatique de l'espace disque minimum et de la compatibilité avec Windows 11</li>
+                            <li>Fusion avec d'autres fichiers pour inclure des informations supplémentaires (état des appareils, etc.)</li>
+                            <li>Génération de rapports Excel avec des feuilles séparées pour les appareils compatibles et non compatibles</li>
+                            <li>Application d'un style conditionnel (coloration des lignes en vert pour les migrations réussies ou validées)</li>
                         </ul>
-                    </div>
+                    
+                        <h2>Extrait du Script Python</h2>
+                        <pre>
+                    <code>
+                    import pandas as pd
+                    from openpyxl import load_workbook
+                    from openpyxl.styles import PatternFill
+                    
+                    # Fonction principale pour traiter les données
+                    def extract_matching_names(fichier_export_azure, fichier_wave_w11, fichier_export_asset, output_folder):
+                        df1 = pd.read_excel(fichier_export_azure)
+                        df3 = pd.read_excel(fichier_export_asset)
+                    
+                        # Préparation des données
+                        df1['Free storage'] = df1['Free storage'] / 1000
+                        df1['OS version'] = df1['OS version'].apply(lambda x: 'Windows 11' if str(x).startswith('10.0.22') else 'Windows 10')
+                    
+                        # Fusion des fichiers
+                        df1 = df1.merge(df3[['Asset tag', 'State']], left_on='Device name', right_on='Asset tag', how='left')
+                        ...
+                    </code>
+                        </pre>
+                    </div>                    
                 </div>
             </div>
         </section>

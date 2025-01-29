@@ -19,25 +19,96 @@
     <main>
         <section class="section">
             <div class="container">
-                <h1>Application Mobile</h1>
+                <h1>EDF</h1>
                 <div class="project-details">
-                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&auto=format&fit=crop&q=60" alt="Application Mobile" class="project-hero-image">
+                    <img src="https://images.unsplash.com/photo-1603796846097-bee99e4a601f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Application Mobile" class="project-hero-image">
                     <div class="project-info">
-                        <h2>Description du Projet</h2>
-                        <p>[Description détaillée du projet]</p>
+                        <h2>Description du projet : Gestion des branchements électriques du centre EDF de Douvres</h2>
+    
+                        <h3>Contexte</h3>
+                        <p>Le centre EDF de Douvres est responsable de la gestion des branchements électriques dans le département du Calvados. Une partie des interventions est sous-traitée à des entreprises externes.</p>
+                        <p>Le processus de traitement d'un branchement inclut plusieurs étapes :</p>
+                        <ul>
+                            <li>Enregistrement et validation de la demande du client</li>
+                            <li>Élaboration du devis</li>
+                            <li>Gestion des plannings et communication avec les sous-traitants</li>
+                            <li>Réalisation des branchements</li>
+                            <li>Enquête de satisfaction et contrôle qualité</li>
+                        </ul>
+                        <p>Le département est divisé en <strong>Zones Élémentaires d’Intervention (ZEI)</strong>, chacune correspondant à une ville principale.</p>
                         
+                        <h3>Objectifs du projet</h3>
+                        <h4>1. Numérisation et amélioration de la gestion des demandes de branchements</h4>
+                        <ul>
+                            <li>Mise en place d’un système digitalisé pour le suivi des demandes</li>
+                            <li>Définition d’une charte graphique et amélioration de l’ergonomie des applications</li>
+                        </ul>
+                        
+                        <h4>2. Modélisation des données</h4>
+                        <ul>
+                            <li>Reprise et compréhension d’un modèle entité-association (MCD) déjà existant</li>
+                            <li>Sauvegarde du modèle sous format numérique pour faciliter les modifications</li>
+                        </ul>
+                        
+                        <h4>3. Suivi des demandes par plusieurs responsables qualité</h4>
+                        <p>Une même demande pourra être suivie par plusieurs responsables à des dates différentes.</p>
+                        
+                        <h4>4. Mise en place d’un SGBDR (Système de Gestion de Base de Données Relationnel)</h4>
+                        <ul>
+                            <li>Stockage, mise à jour et gestion des données</li>
+                            <li>Solution accessible en ligne avec une préférence pour les logiciels libres</li>
+                        </ul>
+                        
+                        <h3>Gestion des plannings des sous-traitants</h3>
+                        <p>Chaque sous-traitant signe des <strong>contrats</strong> indiquant les <strong>ZEI couvertes</strong> et les jours d’intervention possibles.</p>
+                        <p>Une nouvelle application locale sera développée pour <strong>remplacer l’outil actuel hébergé à Mulhouse</strong>, jugé trop complexe.</p>
+                        
+                        <h4>Exigences fonctionnelles :</h4>
+                        <ul>
+                            <li>Affichage des journées pleines pour une ZEI spécifique</li>
+                            <li>Identification des sous-traitants avec plus de 100 interventions</li>
+                            <li>Recherche des sous-traitants couvrant toutes les ZEI</li>
+                        </ul>
+                        
+                        <h4>Automatisation de la gestion des disponibilités</h4>
+                        <ul>
+                            <li>Un outil devra générer automatiquement les disponibilités restantes des sous-traitants pour chaque journée</li>
+                            <li>Une application multi-plateforme (Windows, Linux) avec un accès mobile devra être développée</li>
+                        </ul>
+                        
+                        <h3>Conclusion</h3>
+                        <p>Ce projet vise à moderniser et automatiser la gestion des branchements électriques du centre EDF de Douvres en mettant en place :</p>
+                        <ul>
+                            <li>Une numérisation complète des processus administratifs</li>
+                            <li>Un suivi optimisé des demandes et des plannings</li>
+                            <li>Une base de données relationnelle performante et accessible en ligne</li>
+                            <li>Une application multiplateforme pour la consultation et la gestion des interventions</li>
+                        </ul>
+                        <a href="https://www.figma.com/design/lLusztI6r0FD0cz8JUeZYX/Untitled?node-id=0-1&t=yzPK15UWtq2yd2FQ-1">
+                        <img src="/assets/IMG/EDF.png" alt="Maquette" >
+                        </a>
                         <h2>Technologies Utilisées</h2>
                         <ul class="tech-list">
-                            <li>Flutter</li>
-                            <li>Dart</li>
-                            <li>Firebase</li>
+                            <li>MySQL / MariaDB</li>
+                            <li>PHP</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                            <br>
+                            <li>Figma</li>
                         </ul>
 
                         <h2>Fonctionnalités Principales</h2>
                         <ul class="feature-list">
-                            <li>[Fonctionnalité 1]</li>
-                            <li>[Fonctionnalité 2]</li>
-                            <li>[Fonctionnalité 3]</li>
+                            <li>Gestion des demandes de branchement</li>
+                            <li>Suivi des contrats des sous-traitants</li>
+                            <li>Planification des interventions</li>
+                            <li>Gestion des disponibilités des sous-traitants</li>
+                            <li>Numérisation et stockage des données</li>
+                            <li>Modélisation et gestion de la base de données</li>
+                            <li>Suivi des demandes par les responsables qualité</li>
+                            <li>Accès et consultation via une application web</li>
+                            <li>Génération de statistiques et d’optimisation des interventions</li>
+                            <li>Sécurisation des accès et des données</li>
                         </ul>
                     </div>
                 </div>
