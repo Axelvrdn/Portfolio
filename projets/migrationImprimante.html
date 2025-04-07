@@ -8,13 +8,55 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <header class="header">
-        <nav class="container">
-            <div class="nav-content">
-                <h1 class="projet-logo"><a href="../index.html">Portfolio</a></h1>
+<!-- Header -->
+<header class="header">
+    <nav class="container">
+        <div class="nav-content">
+            <h1 class="projet-logo"><a href="../index.html">Portfolio</a></h1>              
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <div class="nav-links">
+                <a href="#Imprimante" class="nav-link active">
+                    <i data-lucide="code-2"></i>
+                    <span>Imprimante</span>
+                </a>
+                <a href="#Excel" class="nav-link">
+                    <i data-lucide="building"></i>
+                    <span>Excel</span>
+                </a>
+                <a href="#UniFlow" class="nav-link">
+                    <i data-lucide="graduation-cap"></i>
+                    <span>UniFlow</span>
+                </a>
+                <a href="#Compétences" class="nav-link">
+                    <i data-lucide="book-open"></i>
+                    <span>Compétences</span>
+                </a>
             </div>
-        </nav>
-    </header>
+        </div>
+
+        <div class="mobile-menu">
+            <a href="#Imprimante" class="nav-link">
+                <i data-lucide="code-2"></i>
+                <span>Imprimante</span>
+            </a>
+            <a href="#Fonctionnalités" class="nav-link">
+                <i data-lucide="building"></i>
+                <span>Fonctionnalités</span>
+            </a>
+            <a href="#UniFlow" class="nav-link">
+                <i data-lucide="graduation-cap"></i>
+                <span>UniFlow</span>
+            </a>
+            <a href="#Compétences" class="nav-link">
+                <i data-lucide="book-open"></i>
+                <span>Compétences</span>
+            </a>
+        </div>
+    </nav>
+</header>
 
     <main>
         <section class="section">
@@ -23,7 +65,7 @@
                 <div class="project-details">
                     <img src="https://images.unsplash.com/photo-1551781079-6e588ca249f4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Migration Imprimante" class="project-hero-image">
                     <div class="project-info">
-                        <h2>Description du Projet</h2>
+                        <h2 id="Imprimante"></h2>Description du Projet</h2>
                         <p>Le projet de migration vers la nouvelle infrastructure d'impression repose sur l'intégration de la solution Uniflow de Canon, qui permettra d'optimiser la gestion des impressions au sein de l'organisation. Uniflow est conçu pour améliorer l'efficacité des flux de travail d'impression, offrant des fonctionnalités avancées telles que la gestion des coûts, le suivi des impressions et la possibilité de personnalisation des modèles d'impression. Grâce à son interface intuitive et à sa capacité d'intégration avec divers systèmes, Uniflow facilitera la transition depuis l'ancienne solution Xerox tout en garantissant une sécurité renforcée et une réduction des déchets papier. Le déploiement de cette solution s'accompagnera de la formation des utilisateurs et de l'adaptation des processus internes pour maximiser les bénéfices de cette migration, rendant ainsi l'environnement d'impression plus durable et plus efficace pour tous les utilisateurs.</p>
                         
                         <h2>Technologies Utilisées</h2>
@@ -31,18 +73,74 @@
                             <li>Visio</li>
                             <li>Suite Office(Excel, PowerPoint & Teams)</li>
                             <li>Uniflow</li>
+                            <li>Grafana</li>
                         </ul>
 
 
                         <h2>Fichier Visio (diagramme de Gantt)</h2>
                         <img src="../assets/IMG/Imprimante/Visio.png" alt="Visio" class="project-image-enhanced">
 
+
+                        <h2 id="Excel">Fichier Excel Stock physique</h2>
+                        <img src="../assets/IMG/Imprimante/FichierExcelStock.png" alt="" class="project-image-enhanced">
+
+                        <h2>Fichier Excel initiale</h2>
+                        <img src="../assets/IMG/Imprimante/FichierExcel.png" alt="" class="project-image-enhanced">
+
+                        <h2>Image Prix Canon :</h2>
                         <img src="../assets/IMG/Imprimante/FichierCanon.png" alt="" class="project-image-enhanced">
 
-                        <img src="" alt="">
+                        <h2>Transformation en fichier excel Intéractif</h2>
+                        <img src="../assets/IMG/Imprimante/PrixEnExcel.png" alt="" class="project-image-enhanced">
+
+                        <h2>Transformer le fichier de canon en un fichier qui calcule le prix et génère des erreurs.</h2>
+                        <img src="../assets/IMG/Imprimante/FichierExcelDemande.png" alt="" class="project-image-enhanced">
+                        <p>cas erreurs</p>
+                        <img src="../assets/IMG/Imprimante/GestionErreur.png" alt="" class="project-image-enhanced">
+
+                        <h2>Formule :</h2>
+                        <img src="../assets/IMG/Imprimante/FormuleExcel.png" alt="" class="project-image-enhanced">
+
+                        <h2>Fichier Excel :</h2>
+                        <div class="container">
+                            <a href="assets/PDF/CV Axel Verdon 2025.pdf" class="cv-btn" download>
+                                <i data-lucide="download"></i>
+                                Mon Fichier Excel
+                            </a>
+                        </div><br>
+
+                        <h2 id="UniFlow">UniFlow</h2>
+
+                        <p>UniFlow est une solution de gestion des impressions qui permet de contrôler et d'optimiser les flux d'impression au sein d'une organisation. Elle offre des fonctionnalités avancées telles que le suivi des impressions, la gestion des coûts, la sécurité des documents et l'intégration avec divers systèmes d'exploitation et applications. UniFlow permet également de réduire les déchets papier en optimisant les processus d'impression et en offrant des options d'impression recto verso et en plusieurs exemplaires.</p><br>
+                        
+                        <h2>Fonctionnalités</h2>
+                        <ul class="tech-list">
+                            <li>Une imprimante choisis pour pouvoir imprimer dans toutes l'europe</li>
+                            <li>Imprimer depuis son télephone</li>
+                            <li>Impresion sécuriser</li>
+                            <li>Impression via un badge</li>
+                        </ul>
+
+                        <h2>Image de l'interface Uniflow :</h2>
+                        <img src="../assets/IMG/Imprimante/Uniflow.png" alt="" class="project-image-enhanced">
+
+                        <h2>Création de procédure :</h2>
+                        <p>extrait :</p>
+                        <img src="../assets/IMG/Imprimante/Procedure.png" alt="" class="project-image-enhanced">
+
+                        <h2>Exemple procédure :</h2>
+                        <div class="container">
+                            <a href="assets/PDF/CV Axel Verdon 2025.pdf" class="cv-btn" download>
+                                <i data-lucide="download"></i>
+                                Procédure
+                            </a>
+                        </div><br>
 
 
-
+                        <h2 id="Compétences">Compétences Validées</h2>
+                        <li>Gérer le patrimoine informatique</li>
+                        <li>Répondre aux incidents et aux demandes d’assistance et d’évolution</li>
+                        <li>Travailler en mode projet</li>
                     </div>
                 </div>
             </div>
@@ -55,6 +153,6 @@
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    <script src="../script/script.js"></script>
 </body>
 </html>
