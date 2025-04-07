@@ -8,10 +8,44 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
         <nav class="container">
             <div class="nav-content">
-                <h1 class="projet-logo"><a href="../index.html">Portfolio</a></h1>
+                <h1 class="projet-logo"><a href="../index.html">Portfolio</a></h1>              
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+
+                <div class="nav-links">
+                    <a href="#leasing" class="nav-link active">
+                        <i data-lucide="code-2"></i>
+                        <span>Acceuil</span>
+                    </a>
+                    <a href="#Application" class="nav-link">
+                        <i data-lucide="graduation-cap"></i>
+                        <span>Client Lourd</span>
+                    </a>
+                    <a href="#Compétences" class="nav-link">
+                        <i data-lucide="book-open"></i>
+                        <span>Compétences</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mobile-menu">
+                <a href="#leasing" class="nav-link">
+                    <i data-lucide="code-2"></i>
+                    <span>Accueil</span>
+                </a>
+                <a href="#Application" class="nav-link">
+                    <i data-lucide="graduation-cap"></i>
+                    <span>Client Lourd</span>
+                </a>
+                <a href="#Compétences" class="nav-link">
+                    <i data-lucide="book-open"></i>
+                    <span>Compétences</span>
+                </a>
             </div>
         </nav>
     </header>
@@ -23,7 +57,7 @@
                 <div class="project-details">
                     <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&auto=format&fit=crop&q=60" alt="Application Mobile" class="project-hero-image">
                     <div class="project-info">
-                        <h2>Description du Projet</h2>
+                        <h2 id="leasing">Description du Projet</h2>
                         <p>Logiciel C# permettent d'identifier les erreurs de localisation associer aux laptop et identification de la date du leasing de manière plus intuidif et facile</p>
                         <p></p>
                         
@@ -31,8 +65,6 @@
                         <ul class="tech-list">
                             <li>C#</li>
                             <li>Github</li>
-                            <li>Visio</li>
-                            <li>Adobe XD</li>
                         </ul><br>
 
                         <h2>Fonctionnalités Principales</h2>
@@ -41,6 +73,44 @@
                             <li>Identifie les érreures de localisation associer aux laptop</li>
                             <li>Ne fonctionne pas avec une base de données pour éviter les problèmes de sécurité</li>
                         </ul>
+
+                        <h2>Solution avant le Développement de l'applications c#</h2>
+
+                        <h3>Solution Excel :</h3>
+
+                        <p>Fonctionne très bien mais reste compliquer pour l'identification des erreurs de localisation ou du statuts du laptop</p><br>
+                        <div class="container">
+                            <a href="../assets/lease expiration.xlsx" class="cv-btn" download>
+                                <i data-lucide="download"></i>
+                                Fichier Excel
+                            </a>
+                        </div><br>
+
+                        <h3>Solution Grafana</h3>
+                        <p>Après communication avec la personne s'occupent de Grafana cela semble impossible</p><br>
+
+                        <h3>Solution PowerBI</h3>
+                        <p>Après recherche et essai cela semble impossible de le faire sur PowerBI</p><br>
+
+                        <h3>Solution Développement d'un client lourd</h3>
+                        <p>Après plusieurs recherche et essai, il semble que le développement d'un client lourd soit la meilleure solution pour répondre à ce besoin.</p><br>
+
+                        <h2 id="Application">Solution client lourd</h2>
+
+                        <p>Prototype sur cahier</p><br>
+                        <img src="../assets/IMG/Leasing/Prototype.jpg" alt="" class="project-image-enhanced"><br>
+
+                        <p>Client Lourd Actuelle</p><br>
+
+                        <img src="../assets/IMG/Leasing/Page1.png" alt="" class="project-image-enhanced"><br>
+                        <img src="../assets/IMG/Leasing/Page2.jpg" alt="" class="project-image-enhanced"><br>
+                        <img src="../assets/IMG/Leasing/Page3.jpg" alt="" class="project-image-enhanced"><br>
+                        <img src="../assets/IMG/Leasing/Page4.jpg" alt="" class="project-image-enhanced"><br>
+
+                        <h2 id="Compétences">Compétences Validées</h2>
+                        <li>Gérer le patrimoine informatique</li>
+                        <li>Répondre aux incidents et aux demandes d’assistance et d’évolution</li>
+                        <li>Travailler en mode projet</li>
                     </div>
                 </div>
             </div>
