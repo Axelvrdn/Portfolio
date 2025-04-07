@@ -8,10 +8,52 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
         <nav class="container">
             <div class="nav-content">
-                <a href="../index.html" class="logo">Portfolio</a>
+                <h1 class="projet-logo"><a href="../index.html">Portfolio</a></h1>              
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+
+                <div class="nav-links">
+                    <a href="#marieteam" class="nav-link active">
+                        <i data-lucide="code-2"></i>
+                        <span>MarieTeam</span>
+                    </a>
+                    <a href="#web" class="nav-link">
+                        <i data-lucide="building"></i>
+                        <span>Web</span>
+                    </a>
+                    <a href="#Application" class="nav-link">
+                        <i data-lucide="graduation-cap"></i>
+                        <span>Client Lourd</span>
+                    </a>
+                    <a href="#Compétences" class="nav-link">
+                        <i data-lucide="book-open"></i>
+                        <span>Compétences</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mobile-menu">
+                <a href="#marieteam" class="nav-link">
+                    <i data-lucide="code-2"></i>
+                    <span>MarieTeam</span>
+                </a>
+                <a href="#web" class="nav-link">
+                    <i data-lucide="building"></i>
+                    <span>Web</span>
+                </a>
+                <a href="#Application" class="nav-link">
+                    <i data-lucide="graduation-cap"></i>
+                    <span>Client Lourd</span>
+                </a>
+                <a href="#Compétences" class="nav-link">
+                    <i data-lucide="book-open"></i>
+                    <span>Compétences</span>
+                </a>
             </div>
         </nav>
     </header>
@@ -24,7 +66,7 @@
                     <img src="https://images.unsplash.com/photo-1605281317010-fe5ffe798166?q=80&w=2044&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Application Mobile" class="project-hero-image">
                     <div class="project-info">
 
-                        <h2>Organisation du Projet</h2>
+                        <h2 id="marieteam">Organisation du Projet</h2>
                         <p>
                           Nous avons débuté par la rédaction simultanée d’un résumé du cahier des charges, incluant le dictionnaire de données 
                           (<a href="../assets/Projet AP.docx" target="_blank">voir document</a>).
@@ -48,7 +90,7 @@
                         <h2>Description du Projet</h2>
                         <p>Ce projet consiste à développer deux solutions distinctes pour la compagnie MarieTeam :</p><br>
 
-                        <h2>1. Web</h2>
+                        <h2 id="web">1. Client Web</h2>
                         <p>
                             Un site web permettant la gestion et la consultation des liaisons maritimes, des tarifs, des horaires, ainsi que la réservation en ligne. Les informations sont générées dynamiquement à partir d'une base de données, et l'application est optimisée pour une large gamme d'appareils (smartphones, tablettes, PC).
                         </p><br>
@@ -73,34 +115,51 @@
                             <li>Gestion des droits d’accès pour le personnel et les gestionnaires</li>
                             <li>Compatibilité multiplateforme et responsive design</li>
                             <li>Visualisation des statistiques pour les gestionnaires</li>
-                        </ul><br>                     
+                        </ul><br>
 
                         <h2>Plus concrètement :</h2>
 
+                        <h2>Diagramme de Gantt</h2>
+
+                        <img src="../assets/IMG/web marieteam/diagrammeDeGantt.png" alt="" class="project-image-enhanced">
+
+                        <h2>Diagramme de cas d'utilisation</h2>
+
+                        <img src="../assets/IMG/web marieteam/DCU.png" alt="" class="project-image-enhanced">
+
                         <h2>Mise en place du Github :</h2>
+
+                        <p>Voici le lien vers le Github du projet : <a href="https://github.com/Beno04/AP_realpro_1">https://github.com/Beno04/AP_realpro_1</a></p>
+                        <img src="../assets/IMG/web marieteam/Github.png" alt="" class="project-image-enhanced">
+                        <img src="../assets/IMG/web marieteam/Contributor.png" alt="" class="project-image-enhanced">
+
+                        <h2>Création d'un MCD</h2>
+
+
+                        <img src="../assets/IMG/web marieteam/MCD.png" alt="" class="project-image-enhanced">
 
                         <h2>Parti Utilisateur :</h2>
                         <p>L'index du site</p>
-                        <img src="../assets/IMG/MarieTeamc/connexion_c.png" alt="" class="project-image">
+                        <img src="../assets/IMG/web marieteam/index.png" alt="" class="project-image-enhanced">
                         <p>Page de connexion</p>
-                        <img src="../assets/IMG/MarieTeamc/Ui_user.png" alt="" class="project-image">
+                        <img src="../assets/IMG/web marieteam/Connexion.png" alt="" class="project-image-enhanced">
                         <p>Page de choix de la traversées :</p>
-                        <img src="../assets/IMG/MarieTeamc/Ui_admin.png" alt="" class="project-image">
+                        <img src="../assets/IMG/web marieteam/Reserver.png" alt="" class="project-image-enhanced">
                         <p>Page réservation permettant de choisir le nombre de chaque reservation de personnes et véhicule (s'adapte en temps réel de la place disponnible) :</p>
-                        <img src="../assets/IMG/MarieTeamc/PDF.png" alt="" class="project-image">
+                        <img src="../assets/IMG/web marieteam/Réservation.png" alt="" class="project-image-enhanced">
                         <p>Page Payer qui résumer le montant et toutes les informations de la traversées et de la réservation :</p>
-                        <img src="../assets/IMG/MarieTeamc/PDF.png" alt="" class="project-image">
+                        <img src="../assets/IMG/web marieteam/Payer.png" alt="" class="project-image-enhanced">
 
                         <h2>Parti administrateur :</h2>
                         <p>L'index du site en tant qu'administrateur</p>
-                        <img src="../assets/IMG/MarieTeamc/connexion_c.png" alt="" class="project-image">
+                        <img src="../assets/IMG/web marieteam/adminIndex.png" alt="" class="project-image-enhanced">
                         <p>Page statistiques selon les dates choisis</p>
-                        <img src="../assets/IMG/MarieTeamc/Ui_user.png" alt="" class="project-image">
+                        <img src="../assets/IMG/web marieteam/AdminStat.png" alt="" class="project-image-enhanced">
                         <p>Page permettant d'ajouter des traversées</p>
-                        <img src="../assets/IMG/MarieTeamc/Ui_user.png" alt="" class="project-image">
+                        <img src="../assets/IMG/web marieteam/AdminAjout.png" alt="" class="project-image-enhanced">
 
 
-                        <h2>2. Application</h2>
+                        <h2 id="Application">2. Client Lourd</h2>
                         <p>
                             Une application qui permet de générer des PDF des bateaux à partir des données de la base de données. De plus, si l'utilisateur est administrateur, il a la possibilité de créer, modifier ou supprimer des bateaux.
                         </p><br>
@@ -123,36 +182,21 @@
                         <h2>Plus concrètement :</h2>
 
                         <p>Lorsque l'on lance l'application nous avons besoin de nous connecter</p>
-                        <img src="../assets/IMG/MarieTeamc/connexion_c.png" alt="" class="project-image">
+                        <img src="../assets/IMG/MarieTeamc/connexion_c.png" alt="" class="project-image-enhanced">
                         <p>Si on ce connecte avec un compte Utilisateur voici l'affichage que l'on aura :</p>
-                        <img src="../assets/IMG/MarieTeamc/Ui_user.png" alt="" class="project-image">
+                        <img src="../assets/IMG/MarieTeamc/Ui_user.png" alt="" class="project-image-enhanced">
                         <p>Si on ce connecte avec un compte Admin voici l'affichage que l'on aurras :</p>
-                        <img src="../assets/IMG/MarieTeamc/Ui_admin.png" alt="" class="project-image">
+                        <img src="../assets/IMG/MarieTeamc/Ui_admin.png" alt="" class="project-image-enhanced">
                         <p>Et voici le PDF que l'application génère</p>
-                        <img src="../assets/IMG/MarieTeamc/PDF.png" alt="" class="project-image">
+                        <img src="../assets/IMG/MarieTeamc/PDF.png" alt="" class="project-image-enhanced">
                         <br><br>
 
-                        <h2>Compétences Validées</h2>
-                            <li>Gérer le
-                                patrimoine
-                                informatique
-                                </li>
-                            <li>Développer la
-                                présence en
-                                ligne de
-                                l’organisation
-                                </li>
-                            <li>Travailler en
-                                mode projet
-                                </li>
-                            <li>Mettre à
-                                disposition des
-                                utilisateurs un
-                                service
-                                informatique</li>
-                            <li>Organiser son
-                                développement
-                                professionnel</li>
+                        <h2 id="Compétences">Compétences Validées</h2>
+                            <li>Gérer le patrimoine informatique</li>
+                            <li>Développer la présence en ligne de l’organisation</li>
+                            <li>Travailler en mode projet</li>
+                            <li>Mettre à disposition des utilisateurs un service informatique</li>
+                            <li>Organiser son développement professionnel</li>
                     </div>                    
                 </div>
             </div>

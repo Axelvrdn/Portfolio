@@ -407,6 +407,22 @@ body {
     font-weight: 500;
 }
 
+/* Styles pour les images améliorées */
+.project-image-enhanced {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-image-enhanced:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 /* PDF Container */
 .pdf-container {
     max-width: 48rem;
@@ -519,4 +535,23 @@ code {
     font-family: 'Courier New', monospace;
     font-size: 1.1em;
     color: #333;
+}
+
+.projet-logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary);
+    text-align: center;
+    margin: 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.projet-logo a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.projet-logo a:hover {
+    color: var(--primary-light);
 }
