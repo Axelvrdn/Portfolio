@@ -39,8 +39,8 @@ function ProjectFeature({
 
     const trigger = ScrollTrigger.create({
       trigger: blockRef.current,
-      start: 'top bottom',
-      end: 'bottom top',
+      start: 'top bottom+=260',
+      end: 'bottom top-=120',
       scrub: true,
       onUpdate: (self) => {
         if (rafId) cancelAnimationFrame(rafId)
@@ -115,40 +115,38 @@ function ProjectFeature({
         </a>
       </div>
 
-      <DeferredRender
-        className={
-          variant === 'phone'
-            ? reverse
-              ? 'phone-showcase-stage relative h-[380px] overflow-visible sm:h-[480px] lg:order-1 lg:h-[560px]'
-              : 'phone-showcase-stage relative h-[380px] overflow-visible sm:h-[480px] lg:h-[560px]'
-            : variant === 'laptop'
+      {variant === 'phone' || variant === 'laptop' ? (
+        <div
+          className={
+            variant === 'phone'
               ? reverse
-                ? 'laptop-showcase-stage relative h-[390px] overflow-visible sm:h-[500px] lg:order-1 lg:h-[580px]'
-                : 'laptop-showcase-stage relative h-[390px] overflow-visible sm:h-[500px] lg:h-[580px]'
-            : reverse
+                ? 'phone-showcase-stage relative h-[360px] overflow-visible sm:h-[460px] lg:order-1 lg:h-[540px]'
+                : 'phone-showcase-stage relative h-[360px] overflow-visible sm:h-[460px] lg:h-[540px]'
+              : reverse
+                ? 'laptop-showcase-stage relative h-[370px] overflow-visible sm:h-[480px] lg:order-1 lg:h-[560px]'
+                : 'laptop-showcase-stage relative h-[370px] overflow-visible sm:h-[480px] lg:h-[560px]'
+          }
+        >
+          <Suspense fallback={<div className="h-full w-full bg-transparent" />}>
+            <ProjectPreview accent={accent} variant={variant} scrollProgress={progress} />
+          </Suspense>
+        </div>
+      ) : (
+        <DeferredRender
+          className={
+            reverse
               ? 'project-stage relative h-[360px] overflow-hidden rounded-[2rem] sm:h-[430px] lg:order-1'
               : 'project-stage relative h-[360px] overflow-hidden rounded-[2rem] sm:h-[430px]'
-        }
-        rootMargin={variant === 'phone' || variant === 'laptop' ? '1200px 0px' : '220px 0px'}
-        fallback={
-          <div
-            className={
-              variant === 'phone'
-                ? 'h-full w-full bg-transparent'
-                : variant === 'laptop'
-                  ? 'h-full w-full bg-transparent'
-                  : 'h-full w-full animate-pulse rounded-[2rem] bg-slate-200/70'
-            }
-          />
-        }
-      >
-        {variant !== 'phone' && variant !== 'laptop' ? (
+          }
+          rootMargin="220px 0px"
+          fallback={<div className="h-full w-full animate-pulse rounded-[2rem] bg-slate-200/70" />}
+        >
           <div className="pointer-events-none absolute inset-x-12 bottom-5 h-20 rounded-full bg-slate-300/30 blur-2xl" />
-        ) : null}
-        <Suspense fallback={<div className="h-full w-full animate-pulse rounded-[2rem] bg-slate-200/70" />}>
-          <ProjectPreview accent={accent} variant={variant} scrollProgress={progress} />
-        </Suspense>
-      </DeferredRender>
+          <Suspense fallback={<div className="h-full w-full animate-pulse rounded-[2rem] bg-slate-200/70" />}>
+            <ProjectPreview accent={accent} variant={variant} scrollProgress={progress} />
+          </Suspense>
+        </DeferredRender>
+      )}
     </article>
   )
 }
@@ -172,7 +170,7 @@ export default function Projects() {
           </p>
         </div>
 
-        <div className="neon-focus--projects mt-12 px-6 sm:px-10">
+        <div className="mt-12 px-6 sm:px-10">
           {projects.map((project, index) => (
             <ProjectFeature
               key={project.title}

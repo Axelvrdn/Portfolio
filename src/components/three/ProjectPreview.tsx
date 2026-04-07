@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from 'react'
 import type { Group } from 'three'
-import { Box3, Color, MathUtils, SRGBColorSpace, Vector3 } from 'three'
+import { Box3, MathUtils, SRGBColorSpace, Vector3 } from 'three'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, useGLTF, useTexture } from '@react-three/drei'
 import appScreenImage from '../../assets/hero.png'
@@ -61,9 +61,9 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     if (!groupRef.current) return
 
     const progress = Number.isFinite(scrollProgress) ? MathUtils.clamp(scrollProgress, 0, 1) : 0
-    const reveal = MathUtils.smoothstep(progress, 0, 0.86)
+    const reveal = MathUtils.smoothstep(progress, -0.45, 0.42)
     const cinematicReveal = 1 - Math.pow(1 - reveal, 3)
-    const isLocked = reveal > 0.94
+    const isLocked = reveal > 0.84
     const overshootPhase = MathUtils.smoothstep(cinematicReveal, 0.72, 0.94)
     const overshoot = Math.sin(overshootPhase * Math.PI) * (1 - overshootPhase) * 0.14
 
@@ -116,7 +116,7 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
   )
 }
 
-function LaptopDevice({ accent, isLite, scrollProgress }: DeviceProps) {
+function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
   const groupRef = useRef<Group | null>(null)
   const [hovered, setHovered] = useState(false)
   const model = useFittedModel(laptopModelUrl, isLite ? 2.35 : 2.7)
@@ -125,9 +125,9 @@ function LaptopDevice({ accent, isLite, scrollProgress }: DeviceProps) {
     if (!groupRef.current) return
 
     const progress = Number.isFinite(scrollProgress) ? MathUtils.clamp(scrollProgress, 0, 1) : 0
-    const reveal = MathUtils.smoothstep(progress, 0, 0.88)
+    const reveal = MathUtils.smoothstep(progress, -0.42, 0.46)
     const cinematicReveal = 1 - Math.pow(1 - reveal, 3)
-    const isLocked = reveal > 0.95
+    const isLocked = reveal > 0.86
     const overshootPhase = MathUtils.smoothstep(cinematicReveal, 0.72, 0.95)
     const overshoot = Math.sin(overshootPhase * Math.PI) * (1 - overshootPhase) * 0.18
 
@@ -175,10 +175,6 @@ function LaptopDevice({ accent, isLite, scrollProgress }: DeviceProps) {
       position={[-5.8, 0.58, 0.72]}
     >
       <primitive object={model} rotation={[0, Math.PI * 0.86, 0]} />
-      <mesh position={[0, -0.74, 0.02]} rotation={[-Math.PI / 2, 0, 0]}>
-        <circleGeometry args={[1.24, 72]} />
-        <meshStandardMaterial color={new Color(accent)} transparent opacity={0.15} />
-      </mesh>
     </group>
   )
 }
@@ -218,7 +214,7 @@ export default function ProjectPreview({
       <pointLight position={[1.2, -0.8, 1.4]} intensity={isLite ? 0.14 : 0.28} color="#cbd5e1" />
       <Environment preset="city" />
       {isLaptop ? (
-        <LaptopDevice accent={accent} isLite={isLite} scrollProgress={scrollProgress} />
+        <LaptopDevice isLite={isLite} scrollProgress={scrollProgress} />
       ) : (
         <PhoneDevice isLite={isLite} scrollProgress={scrollProgress} />
       )}

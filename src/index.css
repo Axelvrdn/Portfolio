@@ -170,13 +170,17 @@ a {
 }
 
 .phone-showcase-stage {
-  border: none;
-  background: transparent;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .laptop-showcase-stage {
-  border: none;
-  background: transparent;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .phone-showcase-stage canvas {
@@ -185,6 +189,13 @@ a {
 
 .laptop-showcase-stage canvas {
   overflow: visible;
+}
+
+.phone-showcase-stage::before,
+.phone-showcase-stage::after,
+.laptop-showcase-stage::before,
+.laptop-showcase-stage::after {
+  display: none !important;
 }
 
 .project-repo-link {
