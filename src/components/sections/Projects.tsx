@@ -31,6 +31,7 @@ function ProjectFeature({
 }: ProjectFeatureProps) {
   const blockRef = useRef<HTMLElement | null>(null)
   const [progress, setProgress] = useState(0)
+  const isImmersiveShowcase = variant === 'phone' || variant === 'laptop'
 
   useEffect(() => {
     if (!blockRef.current) return
@@ -82,9 +83,31 @@ function ProjectFeature({
   return (
     <article
       ref={blockRef}
-      className="grid gap-8 border-b border-slate-200/80 py-16 last:border-b-0 lg:min-h-[68vh] lg:grid-cols-[0.88fr_1.12fr] lg:items-center lg:py-24"
+      className={
+        isImmersiveShowcase
+          ? 'relative border-b border-slate-200/80 py-16 last:border-b-0 lg:min-h-[68vh] lg:py-24'
+          : 'grid gap-8 border-b border-slate-200/80 py-16 last:border-b-0 lg:min-h-[68vh] lg:grid-cols-[0.88fr_1.12fr] lg:items-center lg:py-24'
+      }
     >
-      <div className={reverse ? 'lg:order-2 lg:pl-10' : 'lg:pr-10'}>
+      {isImmersiveShowcase ? (
+        <div className="absolute inset-0 z-0">
+          <Suspense fallback={<div className="h-full w-full bg-transparent" />}>
+            <ProjectPreview accent={accent} variant={variant} scrollProgress={progress} />
+          </Suspense>
+        </div>
+      ) : null}
+
+      <div
+        className={
+          isImmersiveShowcase
+            ? reverse
+              ? 'relative z-10 ml-auto max-w-3xl space-y-0 lg:pl-[38%]'
+              : 'relative z-10 max-w-3xl space-y-0 lg:pr-[38%]'
+            : reverse
+              ? 'lg:order-2 lg:pl-10'
+              : 'lg:pr-10'
+        }
+      >
         <p className="eyebrow">Projet produit</p>
         <h3 className="mt-4 text-[clamp(2rem,4.1vw,4.3rem)] font-bold leading-[0.95] tracking-[-0.035em] text-slate-900">
           {title}
@@ -115,23 +138,7 @@ function ProjectFeature({
         </a>
       </div>
 
-      {variant === 'phone' || variant === 'laptop' ? (
-        <div
-          className={
-            variant === 'phone'
-              ? reverse
-                ? 'phone-showcase-stage relative h-[360px] overflow-visible sm:h-[460px] lg:order-1 lg:h-[540px]'
-                : 'phone-showcase-stage relative h-[360px] overflow-visible sm:h-[460px] lg:h-[540px]'
-              : reverse
-                ? 'laptop-showcase-stage relative h-[370px] overflow-visible sm:h-[480px] lg:order-1 lg:h-[560px]'
-                : 'laptop-showcase-stage relative h-[370px] overflow-visible sm:h-[480px] lg:h-[560px]'
-          }
-        >
-          <Suspense fallback={<div className="h-full w-full bg-transparent" />}>
-            <ProjectPreview accent={accent} variant={variant} scrollProgress={progress} />
-          </Suspense>
-        </div>
-      ) : (
+      {!isImmersiveShowcase ? (
         <DeferredRender
           className={
             reverse
@@ -146,7 +153,7 @@ function ProjectFeature({
             <ProjectPreview accent={accent} variant={variant} scrollProgress={progress} />
           </Suspense>
         </DeferredRender>
-      )}
+      ) : null}
     </article>
   )
 }
