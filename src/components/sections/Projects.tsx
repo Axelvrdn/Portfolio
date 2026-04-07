@@ -39,8 +39,8 @@ function ProjectFeature({
 
     const trigger = ScrollTrigger.create({
       trigger: blockRef.current,
-      start: 'top 96%',
-      end: 'bottom 8%',
+      start: 'top bottom',
+      end: 'bottom top',
       scrub: true,
       onUpdate: (self) => {
         if (rafId) cancelAnimationFrame(rafId)
@@ -129,14 +129,15 @@ function ProjectFeature({
               ? 'project-stage relative h-[360px] overflow-hidden rounded-[2rem] sm:h-[430px] lg:order-1'
               : 'project-stage relative h-[360px] overflow-hidden rounded-[2rem] sm:h-[430px]'
         }
+        rootMargin={variant === 'phone' || variant === 'laptop' ? '1200px 0px' : '220px 0px'}
         fallback={
           <div
             className={
               variant === 'phone'
-                ? 'h-full w-full animate-pulse bg-gradient-to-r from-transparent via-slate-100/60 to-transparent'
+                ? 'h-full w-full bg-transparent'
                 : variant === 'laptop'
-                  ? 'h-full w-full animate-pulse bg-gradient-to-r from-transparent via-slate-100/55 to-transparent'
-                : 'h-full w-full animate-pulse rounded-[2rem] bg-slate-200/70'
+                  ? 'h-full w-full bg-transparent'
+                  : 'h-full w-full animate-pulse rounded-[2rem] bg-slate-200/70'
             }
           />
         }
@@ -171,7 +172,7 @@ export default function Projects() {
           </p>
         </div>
 
-        <div className="neon-focus--projects mt-12 rounded-[2rem] px-6 sm:px-10">
+        <div className="neon-focus--projects mt-12 px-6 sm:px-10">
           {projects.map((project, index) => (
             <ProjectFeature
               key={project.title}

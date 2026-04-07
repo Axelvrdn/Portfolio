@@ -218,12 +218,6 @@ export default function ProjectPreview({
       <pointLight position={[1.2, -0.8, 1.4]} intensity={isLite ? 0.14 : 0.28} color="#cbd5e1" />
       <Environment preset="city" />
       {isLaptop ? (
-        <mesh position={[0, -0.95, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <circleGeometry args={[1.5, 64]} />
-          <meshStandardMaterial color="#dbeafe" transparent opacity={0.28} />
-        </mesh>
-      ) : null}
-      {isLaptop ? (
         <LaptopDevice accent={accent} isLite={isLite} scrollProgress={scrollProgress} />
       ) : (
         <PhoneDevice isLite={isLite} scrollProgress={scrollProgress} />
