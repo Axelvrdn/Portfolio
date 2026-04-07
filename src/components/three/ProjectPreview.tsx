@@ -61,7 +61,7 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     if (!groupRef.current) return
 
     const progress = Number.isFinite(scrollProgress) ? MathUtils.clamp(scrollProgress, 0, 1) : 0
-    const reveal = MathUtils.smoothstep(progress, 0.04, 0.9)
+    const reveal = MathUtils.smoothstep(progress, 0, 0.86)
     const cinematicReveal = 1 - Math.pow(1 - reveal, 3)
     const isLocked = reveal > 0.94
     const overshootPhase = MathUtils.smoothstep(cinematicReveal, 0.72, 0.94)
@@ -125,7 +125,7 @@ function LaptopDevice({ accent, isLite, scrollProgress }: DeviceProps) {
     if (!groupRef.current) return
 
     const progress = Number.isFinite(scrollProgress) ? MathUtils.clamp(scrollProgress, 0, 1) : 0
-    const reveal = MathUtils.smoothstep(progress, 0.06, 0.92)
+    const reveal = MathUtils.smoothstep(progress, 0, 0.88)
     const cinematicReveal = 1 - Math.pow(1 - reveal, 3)
     const isLocked = reveal > 0.95
     const overshootPhase = MathUtils.smoothstep(cinematicReveal, 0.72, 0.95)

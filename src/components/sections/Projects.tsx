@@ -39,8 +39,8 @@ function ProjectFeature({
 
     const trigger = ScrollTrigger.create({
       trigger: blockRef.current,
-      start: 'top 78%',
-      end: 'bottom 22%',
+      start: 'top 96%',
+      end: 'bottom 8%',
       scrub: true,
       onUpdate: (self) => {
         if (rafId) cancelAnimationFrame(rafId)
