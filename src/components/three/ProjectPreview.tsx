@@ -61,8 +61,11 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     if (!groupRef.current) return
 
     const progress = Number.isFinite(scrollProgress) ? MathUtils.clamp(scrollProgress, 0, 1) : 0
-    const reveal = MathUtils.smoothstep(progress, 0.06, 0.9)
+    const reveal = MathUtils.smoothstep(progress, 0.04, 0.9)
+    const cinematicReveal = 1 - Math.pow(1 - reveal, 3)
     const isLocked = reveal > 0.94
+    const overshootPhase = MathUtils.smoothstep(cinematicReveal, 0.72, 0.94)
+    const overshoot = Math.sin(overshootPhase * Math.PI) * (1 - overshootPhase) * 0.14
 
     const lockedXPos = 0.74
     const lockedYPos = -0.06
@@ -81,17 +84,17 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
       return
     }
 
-    const targetXPos = MathUtils.lerp(3.2, 0.74, reveal)
-    const targetYPos = MathUtils.lerp(0.18, -0.06, reveal)
-    const targetZPos = MathUtils.lerp(0.28, 0.04, reveal)
+    const targetXPos = MathUtils.lerp(5.4, 0.74 - overshoot, cinematicReveal)
+    const targetYPos = MathUtils.lerp(0.42, -0.06 + overshoot * 0.32, cinematicReveal)
+    const targetZPos = MathUtils.lerp(0.54, 0.04 - overshoot * 0.26, cinematicReveal)
 
-    const targetX = hovered ? 0.05 + state.pointer.y * 0.1 : 0.02
-    const targetY = hovered ? -0.16 + state.pointer.x * 0.22 : -0.08 + reveal * 0.04
+    const targetX = hovered ? 0.05 + state.pointer.y * 0.1 : 0.02 - overshoot * 0.06
+    const targetY = hovered ? -0.16 + state.pointer.x * 0.22 : -0.08 + reveal * 0.04 + overshoot * 0.08
     const targetZ = hovered ? 0.03 : -0.01
 
-    groupRef.current.position.x = MathUtils.lerp(groupRef.current.position.x, targetXPos, delta * 2)
-    groupRef.current.position.y = MathUtils.lerp(groupRef.current.position.y, targetYPos, delta * 2)
-    groupRef.current.position.z = MathUtils.lerp(groupRef.current.position.z, targetZPos + targetZ, delta * 2)
+    groupRef.current.position.x = MathUtils.lerp(groupRef.current.position.x, targetXPos, delta * 1.8)
+    groupRef.current.position.y = MathUtils.lerp(groupRef.current.position.y, targetYPos, delta * 1.8)
+    groupRef.current.position.z = MathUtils.lerp(groupRef.current.position.z, targetZPos + targetZ, delta * 1.8)
     groupRef.current.rotation.x = MathUtils.lerp(groupRef.current.rotation.x, targetX, delta * 2.6)
     groupRef.current.rotation.y = MathUtils.lerp(groupRef.current.rotation.y, targetY, delta * 2.6)
     groupRef.current.rotation.z = MathUtils.lerp(groupRef.current.rotation.z, targetZ, delta * 2.6)
@@ -102,7 +105,7 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
       ref={groupRef}
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
-      position={[3.2, 0.18, 0.28]}
+      position={[5.4, 0.42, 0.54]}
     >
       <primitive object={model} rotation={[0, Math.PI, 0]} />
       <mesh position={[0.03, 0.07, 0.086]}>
@@ -122,8 +125,11 @@ function LaptopDevice({ accent, isLite, scrollProgress }: DeviceProps) {
     if (!groupRef.current) return
 
     const progress = Number.isFinite(scrollProgress) ? MathUtils.clamp(scrollProgress, 0, 1) : 0
-    const reveal = MathUtils.smoothstep(progress, 0.08, 0.92)
+    const reveal = MathUtils.smoothstep(progress, 0.06, 0.92)
+    const cinematicReveal = 1 - Math.pow(1 - reveal, 3)
     const isLocked = reveal > 0.95
+    const overshootPhase = MathUtils.smoothstep(cinematicReveal, 0.72, 0.95)
+    const overshoot = Math.sin(overshootPhase * Math.PI) * (1 - overshootPhase) * 0.18
 
     const lockedXPos = -0.82
     const lockedYPos = -0.08
@@ -142,23 +148,23 @@ function LaptopDevice({ accent, isLite, scrollProgress }: DeviceProps) {
       return
     }
 
-    const targetXPos = MathUtils.lerp(-3.6, -0.82, reveal)
-    const targetYPos = MathUtils.lerp(0.28, -0.08, reveal)
-    const targetZPos = MathUtils.lerp(0.42, 0.06, reveal)
+    const targetXPos = MathUtils.lerp(-5.8, -0.82 + overshoot, cinematicReveal)
+    const targetYPos = MathUtils.lerp(0.58, -0.08 + overshoot * 0.36, cinematicReveal)
+    const targetZPos = MathUtils.lerp(0.72, 0.06 - overshoot * 0.3, cinematicReveal)
 
-    const openRotationX = MathUtils.lerp(0.64, 0.05, reveal)
-    const openRotationY = MathUtils.lerp(0.86, 0.04, reveal)
-    const openRotationZ = MathUtils.lerp(-0.16, 0, reveal)
+    const openRotationX = MathUtils.lerp(0.72, 0.05 + overshoot * 0.1, cinematicReveal)
+    const openRotationY = MathUtils.lerp(1.02, 0.04 - overshoot * 0.14, cinematicReveal)
+    const openRotationZ = MathUtils.lerp(-0.2, 0 + overshoot * 0.06, cinematicReveal)
 
     const pointerX = hovered ? state.pointer.y * 0.08 : 0
     const pointerY = hovered ? state.pointer.x * 0.12 : 0
 
-    groupRef.current.position.x = MathUtils.lerp(groupRef.current.position.x, targetXPos, delta * 2)
-    groupRef.current.position.y = MathUtils.lerp(groupRef.current.position.y, targetYPos, delta * 2)
-    groupRef.current.position.z = MathUtils.lerp(groupRef.current.position.z, targetZPos, delta * 2)
-    groupRef.current.rotation.x = MathUtils.lerp(groupRef.current.rotation.x, openRotationX + pointerX, delta * 2.5)
-    groupRef.current.rotation.y = MathUtils.lerp(groupRef.current.rotation.y, openRotationY + pointerY, delta * 2.5)
-    groupRef.current.rotation.z = MathUtils.lerp(groupRef.current.rotation.z, openRotationZ, delta * 2.5)
+    groupRef.current.position.x = MathUtils.lerp(groupRef.current.position.x, targetXPos, delta * 1.7)
+    groupRef.current.position.y = MathUtils.lerp(groupRef.current.position.y, targetYPos, delta * 1.7)
+    groupRef.current.position.z = MathUtils.lerp(groupRef.current.position.z, targetZPos, delta * 1.7)
+    groupRef.current.rotation.x = MathUtils.lerp(groupRef.current.rotation.x, openRotationX + pointerX, delta * 2.2)
+    groupRef.current.rotation.y = MathUtils.lerp(groupRef.current.rotation.y, openRotationY + pointerY, delta * 2.2)
+    groupRef.current.rotation.z = MathUtils.lerp(groupRef.current.rotation.z, openRotationZ, delta * 2.2)
   })
 
   return (
@@ -166,7 +172,7 @@ function LaptopDevice({ accent, isLite, scrollProgress }: DeviceProps) {
       ref={groupRef}
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
-      position={[-3.6, 0.28, 0.42]}
+      position={[-5.8, 0.58, 0.72]}
     >
       <primitive object={model} rotation={[0, Math.PI * 0.86, 0]} />
       <mesh position={[0, -0.74, 0.02]} rotation={[-Math.PI / 2, 0, 0]}>
