@@ -117,13 +117,33 @@ function ProjectFeature({
 
       <DeferredRender
         className={
-          reverse
-            ? 'relative h-[360px] overflow-hidden rounded-[2rem] sm:h-[430px] lg:order-1'
-            : 'relative h-[360px] overflow-hidden rounded-[2rem] sm:h-[430px]'
+          variant === 'phone'
+            ? reverse
+              ? 'phone-showcase-stage relative h-[380px] overflow-visible sm:h-[480px] lg:order-1 lg:h-[560px]'
+              : 'phone-showcase-stage relative h-[380px] overflow-visible sm:h-[480px] lg:h-[560px]'
+            : variant === 'laptop'
+              ? reverse
+                ? 'laptop-showcase-stage relative h-[390px] overflow-visible sm:h-[500px] lg:order-1 lg:h-[580px]'
+                : 'laptop-showcase-stage relative h-[390px] overflow-visible sm:h-[500px] lg:h-[580px]'
+            : reverse
+              ? 'project-stage relative h-[360px] overflow-hidden rounded-[2rem] sm:h-[430px] lg:order-1'
+              : 'project-stage relative h-[360px] overflow-hidden rounded-[2rem] sm:h-[430px]'
         }
-        fallback={<div className="h-full w-full animate-pulse rounded-[2rem] bg-slate-200/70" />}
+        fallback={
+          <div
+            className={
+              variant === 'phone'
+                ? 'h-full w-full animate-pulse bg-gradient-to-r from-transparent via-slate-100/60 to-transparent'
+                : variant === 'laptop'
+                  ? 'h-full w-full animate-pulse bg-gradient-to-r from-transparent via-slate-100/55 to-transparent'
+                : 'h-full w-full animate-pulse rounded-[2rem] bg-slate-200/70'
+            }
+          />
+        }
       >
-        <div className="pointer-events-none absolute inset-x-12 bottom-5 h-20 rounded-full bg-slate-300/30 blur-2xl" />
+        {variant !== 'phone' && variant !== 'laptop' ? (
+          <div className="pointer-events-none absolute inset-x-12 bottom-5 h-20 rounded-full bg-slate-300/30 blur-2xl" />
+        ) : null}
         <Suspense fallback={<div className="h-full w-full animate-pulse rounded-[2rem] bg-slate-200/70" />}>
           <ProjectPreview accent={accent} variant={variant} scrollProgress={progress} />
         </Suspense>

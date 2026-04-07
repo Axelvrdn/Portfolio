@@ -169,6 +169,24 @@ a {
   background: linear-gradient(180deg, #f8fafc 0%, #ffffff 35%, #edf2f8 100%);
 }
 
+.phone-showcase-stage {
+  border: none;
+  background: transparent;
+}
+
+.laptop-showcase-stage {
+  border: none;
+  background: transparent;
+}
+
+.phone-showcase-stage canvas {
+  overflow: visible;
+}
+
+.laptop-showcase-stage canvas {
+  overflow: visible;
+}
+
 .project-repo-link {
   border-color: rgba(148, 163, 184, 0.45);
   background: rgba(255, 255, 255, 0.78);
@@ -368,6 +386,14 @@ a {
 [data-theme='dark'] .project-stage {
   border-color: rgba(37, 99, 235, 0.34);
   background: linear-gradient(180deg, rgba(13, 22, 40, 0.92) 0%, rgba(11, 19, 34, 0.98) 100%);
+}
+
+[data-theme='dark'] .phone-showcase-stage {
+  background: transparent;
+}
+
+[data-theme='dark'] .laptop-showcase-stage {
+  background: transparent;
 }
 
 [data-theme='dark'] .project-repo-link {
