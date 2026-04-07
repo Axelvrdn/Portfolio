@@ -169,6 +169,14 @@ a {
   background: linear-gradient(180deg, #f8fafc 0%, #ffffff 35%, #edf2f8 100%);
 }
 
+.immersive-device-layer {
+  pointer-events: none;
+}
+
+.immersive-device-layer canvas {
+  overflow: visible;
+}
+
 .phone-showcase-stage {
   border: none !important;
   border-radius: 0 !important;

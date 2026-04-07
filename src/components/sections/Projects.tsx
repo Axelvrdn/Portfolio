@@ -85,12 +85,12 @@ function ProjectFeature({
       ref={blockRef}
       className={
         isImmersiveShowcase
-          ? 'relative border-b border-slate-200/80 py-16 last:border-b-0 lg:min-h-[68vh] lg:py-24'
+          ? 'relative py-16 lg:min-h-[68vh] lg:py-24'
           : 'grid gap-8 border-b border-slate-200/80 py-16 last:border-b-0 lg:min-h-[68vh] lg:grid-cols-[0.88fr_1.12fr] lg:items-center lg:py-24'
       }
     >
       {isImmersiveShowcase ? (
-        <div className="absolute inset-0 z-0">
+        <div className="immersive-device-layer absolute inset-y-0 -left-[14vw] -right-[14vw] z-0">
           <Suspense fallback={<div className="h-full w-full bg-transparent" />}>
             <ProjectPreview accent={accent} variant={variant} scrollProgress={progress} />
           </Suspense>
@@ -137,6 +137,8 @@ function ProjectFeature({
           Explorer le projet
         </a>
       </div>
+
+      {isImmersiveShowcase ? <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-slate-200/80" /> : null}
 
       {!isImmersiveShowcase ? (
         <DeferredRender
