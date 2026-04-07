@@ -40,7 +40,7 @@ function ProjectFeature({
 
     const trigger = ScrollTrigger.create({
       trigger: blockRef.current,
-      start: 'top bottom+=260',
+      start: 'top bottom',
       end: 'bottom top-=120',
       scrub: true,
       onUpdate: (self) => {
