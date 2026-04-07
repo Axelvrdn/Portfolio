@@ -61,7 +61,7 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     if (!groupRef.current) return
 
     const progress = Number.isFinite(scrollProgress) ? MathUtils.clamp(scrollProgress, 0, 1) : 0
-    const reveal = MathUtils.smoothstep(progress, -0.45, 0.42)
+    const reveal = MathUtils.smoothstep(progress, 0.12, 0.62)
     const cinematicReveal = 1 - Math.pow(1 - reveal, 3)
     const isLocked = reveal > 0.84
     const overshootPhase = MathUtils.smoothstep(cinematicReveal, 0.72, 0.94)
@@ -70,8 +70,8 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     const lockedXPos = 0.74
     const lockedYPos = -0.06
     const lockedZPos = 0.04
-    const lockedRotX = 0.02
-    const lockedRotY = -0.04
+    const lockedRotX = 0
+    const lockedRotY = 0
     const lockedRotZ = 0
 
     if (isLocked) {
@@ -89,7 +89,7 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     const targetZPos = MathUtils.lerp(0.54, 0.04 - overshoot * 0.26, cinematicReveal)
 
     const targetX = hovered ? 0.05 + state.pointer.y * 0.1 : 0.02 - overshoot * 0.06
-    const targetY = hovered ? -0.16 + state.pointer.x * 0.22 : -0.08 + reveal * 0.04 + overshoot * 0.08
+    const targetY = hovered ? -0.16 + state.pointer.x * 0.22 : reveal * 0.02 - 0.02 + overshoot * 0.08
     const targetZ = hovered ? 0.03 : -0.01
 
     groupRef.current.position.x = MathUtils.lerp(groupRef.current.position.x, targetXPos, delta * 1.8)
@@ -125,7 +125,7 @@ function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     if (!groupRef.current) return
 
     const progress = Number.isFinite(scrollProgress) ? MathUtils.clamp(scrollProgress, 0, 1) : 0
-    const reveal = MathUtils.smoothstep(progress, -0.42, 0.46)
+    const reveal = MathUtils.smoothstep(progress, 0.12, 0.64)
     const cinematicReveal = 1 - Math.pow(1 - reveal, 3)
     const isLocked = reveal > 0.86
     const overshootPhase = MathUtils.smoothstep(cinematicReveal, 0.72, 0.95)
@@ -134,8 +134,8 @@ function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     const lockedXPos = -0.82
     const lockedYPos = -0.08
     const lockedZPos = 0.06
-    const lockedRotX = 0.05
-    const lockedRotY = 0.04
+    const lockedRotX = 0
+    const lockedRotY = 0
     const lockedRotZ = 0
 
     if (isLocked) {
@@ -153,7 +153,7 @@ function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     const targetZPos = MathUtils.lerp(0.72, 0.06 - overshoot * 0.3, cinematicReveal)
 
     const openRotationX = MathUtils.lerp(0.72, 0.05 + overshoot * 0.1, cinematicReveal)
-    const openRotationY = MathUtils.lerp(1.02, 0.04 - overshoot * 0.14, cinematicReveal)
+    const openRotationY = MathUtils.lerp(1.02, 0 - overshoot * 0.14, cinematicReveal)
     const openRotationZ = MathUtils.lerp(-0.2, 0 + overshoot * 0.06, cinematicReveal)
 
     const pointerX = hovered ? state.pointer.y * 0.08 : 0
@@ -174,7 +174,7 @@ function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
       onPointerLeave={() => setHovered(false)}
       position={[-5.8, 0.58, 0.72]}
     >
-      <primitive object={model} rotation={[0, Math.PI * 0.86, 0]} />
+      <primitive object={model} rotation={[0, Math.PI, 0]} />
     </group>
   )
 }
