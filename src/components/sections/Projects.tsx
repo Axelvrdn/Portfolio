@@ -41,7 +41,7 @@ function ProjectFeature({
     const trigger = ScrollTrigger.create({
       trigger: blockRef.current,
       start: 'top bottom',
-      end: 'bottom top-=120',
+      end: 'bottom top',
       scrub: true,
       onUpdate: (self) => {
         if (rafId) cancelAnimationFrame(rafId)

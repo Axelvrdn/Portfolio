@@ -49,6 +49,7 @@ function useFittedModel(modelUrl: string, targetSize: number) {
 }
 
 function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
+  const baseYaw = Math.PI
   const groupRef = useRef<Group | null>(null)
   const [hovered, setHovered] = useState(false)
   const model = useFittedModel(phoneModelUrl, isLite ? 2.2 : 2.4)
@@ -71,7 +72,7 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     const lockedYPos = -0.06
     const lockedZPos = 0.04
     const lockedRotX = 0
-    const lockedRotY = 0
+    const lockedRotY = baseYaw
     const lockedRotZ = 0
 
     if (isLocked) {
@@ -89,7 +90,9 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     const targetZPos = MathUtils.lerp(0.54, 0.04 - overshoot * 0.26, cinematicReveal)
 
     const targetX = hovered ? 0.05 + state.pointer.y * 0.1 : 0.02 - overshoot * 0.06
-    const targetY = hovered ? -0.16 + state.pointer.x * 0.22 : reveal * 0.02 - 0.02 + overshoot * 0.08
+    const targetY = hovered
+      ? baseYaw - 0.16 + state.pointer.x * 0.22
+      : baseYaw + reveal * 0.02 - 0.02 + overshoot * 0.08
     const targetZ = hovered ? 0.03 : -0.01
 
     groupRef.current.position.x = MathUtils.lerp(groupRef.current.position.x, targetXPos, delta * 1.8)
@@ -117,6 +120,7 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
 }
 
 function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
+  const baseYaw = Math.PI
   const groupRef = useRef<Group | null>(null)
   const [hovered, setHovered] = useState(false)
   const model = useFittedModel(laptopModelUrl, isLite ? 2.35 : 2.7)
@@ -135,7 +139,7 @@ function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     const lockedYPos = -0.08
     const lockedZPos = 0.06
     const lockedRotX = 0
-    const lockedRotY = 0
+    const lockedRotY = baseYaw
     const lockedRotZ = 0
 
     if (isLocked) {
@@ -153,7 +157,7 @@ function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     const targetZPos = MathUtils.lerp(0.72, 0.06 - overshoot * 0.3, cinematicReveal)
 
     const openRotationX = MathUtils.lerp(0.72, 0.05 + overshoot * 0.1, cinematicReveal)
-    const openRotationY = MathUtils.lerp(1.02, 0 - overshoot * 0.14, cinematicReveal)
+    const openRotationY = MathUtils.lerp(baseYaw + 1.02, baseYaw - overshoot * 0.14, cinematicReveal)
     const openRotationZ = MathUtils.lerp(-0.2, 0 + overshoot * 0.06, cinematicReveal)
 
     const pointerX = hovered ? state.pointer.y * 0.08 : 0
