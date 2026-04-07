@@ -1,8 +1,9 @@
 import { useMemo, useRef, useState } from 'react'
 import type { Group } from 'three'
-import { Box3, Color, MathUtils, Vector3 } from 'three'
+import { Box3, Color, MathUtils, SRGBColorSpace, Vector3 } from 'three'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Environment, useGLTF } from '@react-three/drei'
+import { Environment, useGLTF, useTexture } from '@react-three/drei'
+import appScreenImage from '../../assets/hero.png'
 import laptopModelUrl from '../../assets/models/Macbook Pro 13 2020.glb?url'
 import phoneModelUrl from '../../assets/models/iPhone 16 Pro Max 3D Model.glb?url'
 import { useAdaptive3D } from '../../hooks/useAdaptive3D'
@@ -47,24 +48,53 @@ function useFittedModel(modelUrl: string, targetSize: number) {
   }, [scene, targetSize])
 }
 
-function PhoneDevice({ accent, isLite, scrollProgress }: DeviceProps) {
+function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
   const groupRef = useRef<Group | null>(null)
   const [hovered, setHovered] = useState(false)
   const model = useFittedModel(phoneModelUrl, isLite ? 2.2 : 2.4)
+  const appTexture = useTexture(appScreenImage, (texture) => {
+    texture.colorSpace = SRGBColorSpace
+    texture.needsUpdate = true
+  })
 
   useFrame((state, delta) => {
     if (!groupRef.current) return
 
     const progress = Number.isFinite(scrollProgress) ? MathUtils.clamp(scrollProgress, 0, 1) : 0
-    const scrollLift = MathUtils.lerp(-0.16, 0.06, progress)
-    const targetX = hovered ? 0.16 + state.pointer.y * 0.2 : 0.1 - progress * 0.06
-    const targetY = hovered ? 0.22 + state.pointer.x * 0.3 : 0.18 + progress * 0.2
-    const targetZ = hovered ? 0.03 : -0.03 + progress * 0.03
+    const reveal = MathUtils.smoothstep(progress, 0.06, 0.9)
+    const isLocked = reveal > 0.94
 
-    groupRef.current.position.y = MathUtils.lerp(groupRef.current.position.y, scrollLift, delta * 2.2)
-    groupRef.current.position.z = MathUtils.lerp(groupRef.current.position.z, targetZ, delta * 2.2)
-    groupRef.current.rotation.x = MathUtils.lerp(groupRef.current.rotation.x, targetX, delta * 3)
-    groupRef.current.rotation.y = MathUtils.lerp(groupRef.current.rotation.y, targetY, delta * 2.7)
+    const lockedXPos = 0.74
+    const lockedYPos = -0.06
+    const lockedZPos = 0.04
+    const lockedRotX = 0.02
+    const lockedRotY = -0.04
+    const lockedRotZ = 0
+
+    if (isLocked) {
+      groupRef.current.position.x = MathUtils.lerp(groupRef.current.position.x, lockedXPos, delta * 4)
+      groupRef.current.position.y = MathUtils.lerp(groupRef.current.position.y, lockedYPos, delta * 4)
+      groupRef.current.position.z = MathUtils.lerp(groupRef.current.position.z, lockedZPos, delta * 4)
+      groupRef.current.rotation.x = MathUtils.lerp(groupRef.current.rotation.x, lockedRotX, delta * 4)
+      groupRef.current.rotation.y = MathUtils.lerp(groupRef.current.rotation.y, lockedRotY, delta * 4)
+      groupRef.current.rotation.z = MathUtils.lerp(groupRef.current.rotation.z, lockedRotZ, delta * 4)
+      return
+    }
+
+    const targetXPos = MathUtils.lerp(3.2, 0.74, reveal)
+    const targetYPos = MathUtils.lerp(0.18, -0.06, reveal)
+    const targetZPos = MathUtils.lerp(0.28, 0.04, reveal)
+
+    const targetX = hovered ? 0.05 + state.pointer.y * 0.1 : 0.02
+    const targetY = hovered ? -0.16 + state.pointer.x * 0.22 : -0.08 + reveal * 0.04
+    const targetZ = hovered ? 0.03 : -0.01
+
+    groupRef.current.position.x = MathUtils.lerp(groupRef.current.position.x, targetXPos, delta * 2)
+    groupRef.current.position.y = MathUtils.lerp(groupRef.current.position.y, targetYPos, delta * 2)
+    groupRef.current.position.z = MathUtils.lerp(groupRef.current.position.z, targetZPos + targetZ, delta * 2)
+    groupRef.current.rotation.x = MathUtils.lerp(groupRef.current.rotation.x, targetX, delta * 2.6)
+    groupRef.current.rotation.y = MathUtils.lerp(groupRef.current.rotation.y, targetY, delta * 2.6)
+    groupRef.current.rotation.z = MathUtils.lerp(groupRef.current.rotation.z, targetZ, delta * 2.6)
   })
 
   return (
@@ -72,12 +102,12 @@ function PhoneDevice({ accent, isLite, scrollProgress }: DeviceProps) {
       ref={groupRef}
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
-      position={[0, -0.08, -0.02]}
+      position={[3.2, 0.18, 0.28]}
     >
       <primitive object={model} rotation={[0, Math.PI, 0]} />
-      <mesh position={[0, -0.68, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <circleGeometry args={[0.82, 64]} />
-        <meshStandardMaterial color={new Color(accent)} transparent opacity={0.14} />
+      <mesh position={[0.03, 0.07, 0.086]}>
+        <planeGeometry args={[0.66, 1.38]} />
+        <meshStandardMaterial map={appTexture} transparent toneMapped={false} />
       </mesh>
     </group>
   )
@@ -92,16 +122,43 @@ function LaptopDevice({ accent, isLite, scrollProgress }: DeviceProps) {
     if (!groupRef.current) return
 
     const progress = Number.isFinite(scrollProgress) ? MathUtils.clamp(scrollProgress, 0, 1) : 0
-    const reveal = MathUtils.smoothstep(progress, 0.05, 0.9)
-    const targetX = hovered ? 0.1 + state.pointer.y * 0.16 : 0.06 - reveal * 0.1
-    const targetY = hovered ? state.pointer.x * 0.3 : -0.45 + reveal * 0.34
-    const targetZ = hovered ? 0.05 : -0.09 + reveal * 0.06
-    const targetYPos = -0.16 + reveal * 0.08
+    const reveal = MathUtils.smoothstep(progress, 0.08, 0.92)
+    const isLocked = reveal > 0.95
 
-    groupRef.current.position.y = MathUtils.lerp(groupRef.current.position.y, targetYPos, delta * 2.2)
-    groupRef.current.position.z = MathUtils.lerp(groupRef.current.position.z, targetZ, delta * 2.2)
-    groupRef.current.rotation.x = MathUtils.lerp(groupRef.current.rotation.x, targetX, delta * 2.7)
-    groupRef.current.rotation.y = MathUtils.lerp(groupRef.current.rotation.y, targetY, delta * 2.7)
+    const lockedXPos = -0.82
+    const lockedYPos = -0.08
+    const lockedZPos = 0.06
+    const lockedRotX = 0.05
+    const lockedRotY = 0.04
+    const lockedRotZ = 0
+
+    if (isLocked) {
+      groupRef.current.position.x = MathUtils.lerp(groupRef.current.position.x, lockedXPos, delta * 4)
+      groupRef.current.position.y = MathUtils.lerp(groupRef.current.position.y, lockedYPos, delta * 4)
+      groupRef.current.position.z = MathUtils.lerp(groupRef.current.position.z, lockedZPos, delta * 4)
+      groupRef.current.rotation.x = MathUtils.lerp(groupRef.current.rotation.x, lockedRotX, delta * 4)
+      groupRef.current.rotation.y = MathUtils.lerp(groupRef.current.rotation.y, lockedRotY, delta * 4)
+      groupRef.current.rotation.z = MathUtils.lerp(groupRef.current.rotation.z, lockedRotZ, delta * 4)
+      return
+    }
+
+    const targetXPos = MathUtils.lerp(-3.6, -0.82, reveal)
+    const targetYPos = MathUtils.lerp(0.28, -0.08, reveal)
+    const targetZPos = MathUtils.lerp(0.42, 0.06, reveal)
+
+    const openRotationX = MathUtils.lerp(0.64, 0.05, reveal)
+    const openRotationY = MathUtils.lerp(0.86, 0.04, reveal)
+    const openRotationZ = MathUtils.lerp(-0.16, 0, reveal)
+
+    const pointerX = hovered ? state.pointer.y * 0.08 : 0
+    const pointerY = hovered ? state.pointer.x * 0.12 : 0
+
+    groupRef.current.position.x = MathUtils.lerp(groupRef.current.position.x, targetXPos, delta * 2)
+    groupRef.current.position.y = MathUtils.lerp(groupRef.current.position.y, targetYPos, delta * 2)
+    groupRef.current.position.z = MathUtils.lerp(groupRef.current.position.z, targetZPos, delta * 2)
+    groupRef.current.rotation.x = MathUtils.lerp(groupRef.current.rotation.x, openRotationX + pointerX, delta * 2.5)
+    groupRef.current.rotation.y = MathUtils.lerp(groupRef.current.rotation.y, openRotationY + pointerY, delta * 2.5)
+    groupRef.current.rotation.z = MathUtils.lerp(groupRef.current.rotation.z, openRotationZ, delta * 2.5)
   })
 
   return (
@@ -109,7 +166,7 @@ function LaptopDevice({ accent, isLite, scrollProgress }: DeviceProps) {
       ref={groupRef}
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
-      position={[0, -0.16, -0.08]}
+      position={[-3.6, 0.28, 0.42]}
     >
       <primitive object={model} rotation={[0, Math.PI * 0.86, 0]} />
       <mesh position={[0, -0.74, 0.02]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -154,14 +211,16 @@ export default function ProjectPreview({
       <spotLight position={[-2.1, 1.6, 2.7]} intensity={isLite ? 0.46 : 0.72} color={accent} angle={0.48} />
       <pointLight position={[1.2, -0.8, 1.4]} intensity={isLite ? 0.14 : 0.28} color="#cbd5e1" />
       <Environment preset="city" />
-      <mesh position={[0, -0.95, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <circleGeometry args={[1.5, 64]} />
-        <meshStandardMaterial color="#dbeafe" transparent opacity={0.28} />
-      </mesh>
+      {isLaptop ? (
+        <mesh position={[0, -0.95, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <circleGeometry args={[1.5, 64]} />
+          <meshStandardMaterial color="#dbeafe" transparent opacity={0.28} />
+        </mesh>
+      ) : null}
       {isLaptop ? (
         <LaptopDevice accent={accent} isLite={isLite} scrollProgress={scrollProgress} />
       ) : (
-        <PhoneDevice accent={accent} isLite={isLite} scrollProgress={scrollProgress} />
+        <PhoneDevice isLite={isLite} scrollProgress={scrollProgress} />
       )}
     </Canvas>
   )
