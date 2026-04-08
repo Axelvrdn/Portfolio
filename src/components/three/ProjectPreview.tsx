@@ -1,6 +1,6 @@
-import { useMemo, useRef, useState } from 'react'
-import type { Group } from 'three'
-import { Box3, MathUtils, SRGBColorSpace, Vector3 } from 'three'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import type { Group as ThreeGroup, Object3D } from 'three'
+import { Box3, Group, MathUtils, SRGBColorSpace, Vector3 } from 'three'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, useGLTF, useTexture } from '@react-three/drei'
 import appScreenImage from '../../assets/hero.png'
@@ -50,7 +50,8 @@ function useFittedModel(modelUrl: string, targetSize: number) {
 
 function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
   const baseYaw = Math.PI
-  const groupRef = useRef<Group | null>(null)
+  const screenYawOffset = -0.3
+  const groupRef = useRef<ThreeGroup | null>(null)
   const [hovered, setHovered] = useState(false)
   const model = useFittedModel(phoneModelUrl, isLite ? 2.2 : 2.4)
   const appTexture = useTexture(appScreenImage, (texture) => {
@@ -72,7 +73,7 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     const lockedYPos = -0.06
     const lockedZPos = 0.04
     const lockedRotX = 0
-    const lockedRotY = baseYaw
+    const lockedRotY = baseYaw + screenYawOffset
     const lockedRotZ = 0
 
     if (isLocked) {
@@ -91,8 +92,8 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
 
     const targetX = hovered ? 0.05 + state.pointer.y * 0.1 : 0.02 - overshoot * 0.06
     const targetY = hovered
-      ? baseYaw - 0.16 + state.pointer.x * 0.22
-      : baseYaw + reveal * 0.02 - 0.02 + overshoot * 0.08
+      ? baseYaw + screenYawOffset - 0.16 + state.pointer.x * 0.22
+      : baseYaw + screenYawOffset + reveal * 0.02 - 0.02 + overshoot * 0.08
     const targetZ = hovered ? 0.03 : -0.01
 
     groupRef.current.position.x = MathUtils.lerp(groupRef.current.position.x, targetXPos, delta * 1.8)
@@ -121,9 +122,72 @@ function PhoneDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
 
 function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
   const baseYaw = Math.PI
-  const groupRef = useRef<Group | null>(null)
+  const facingYaw = baseYaw + Math.PI
+  const groupRef = useRef<ThreeGroup | null>(null)
+  const lidRef = useRef<Group | null>(null)
   const [hovered, setHovered] = useState(false)
   const model = useFittedModel(laptopModelUrl, isLite ? 2.35 : 2.7)
+  const riggedModel = useMemo(() => {
+    const root = model.clone(true)
+    const lidGroup = new Group()
+    lidGroup.name = 'LaptopLidGroup'
+    root.add(lidGroup)
+
+    const meshEntries: Array<{ object: Object3D; y: number; z: number }> = []
+    const box = new Box3()
+    const center = new Vector3()
+    const localCenter = new Vector3()
+
+    root.updateMatrixWorld(true)
+    root.traverse((object) => {
+      if (!('isMesh' in object) || !object.isMesh) return
+      box.setFromObject(object)
+      box.getCenter(center)
+      localCenter.copy(center)
+      root.worldToLocal(localCenter)
+      meshEntries.push({ object, y: localCenter.y, z: localCenter.z })
+    })
+
+    const candidateNames = meshEntries
+      .map(({ object }) => object.name?.toLowerCase())
+      .filter(Boolean)
+      .join(' ')
+    const hasNamedScreenParts = /screen|display|lcd|panel|bezel|lid|monitor/.test(candidateNames)
+
+    const lidParts = meshEntries.filter(({ object, y, z }) => {
+      const name = object.name?.toLowerCase() ?? ''
+      const isScreenNamed = /screen|display|lcd|panel|bezel|lid|monitor/.test(name)
+      const isBaseNamed = /base|bottom|keyboard|trackpad|chassis|body/.test(name)
+      if (isBaseNamed) return false
+      if (hasNamedScreenParts) return isScreenNamed
+      return y > 0.08 || (y > 0.03 && z < -0.02)
+    })
+
+    if (lidParts.length > 0) {
+      const hingeY = Math.min(...lidParts.map((part) => part.y))
+      lidGroup.position.set(0, hingeY, 0)
+      lidParts.forEach(({ object }) => {
+        lidGroup.attach(object)
+      })
+    }
+
+    lidRef.current = lidGroup
+    return root
+  }, [model])
+
+  useEffect(() => {
+    const isDebug3D =
+      import.meta.env.DEV ||
+      (typeof window !== 'undefined' &&
+        (window.location.search.includes('debug3d=1') || window.localStorage.getItem('debug3d') === '1'))
+    if (!isDebug3D) return
+    const names: string[] = []
+    model.traverse((object) => {
+      if (!('isMesh' in object) || !object.isMesh) return
+      names.push(object.name || '(unnamed_mesh)')
+    })
+    console.info('[Laptop GLB] Mesh nodes:', names)
+  }, [model])
 
   useFrame((state, delta) => {
     if (!groupRef.current) return
@@ -139,7 +203,7 @@ function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     const lockedYPos = -0.08
     const lockedZPos = 0.06
     const lockedRotX = 0
-    const lockedRotY = baseYaw
+    const lockedRotY = facingYaw
     const lockedRotZ = 0
 
     if (isLocked) {
@@ -149,6 +213,9 @@ function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
       groupRef.current.rotation.x = MathUtils.lerp(groupRef.current.rotation.x, lockedRotX, delta * 4)
       groupRef.current.rotation.y = MathUtils.lerp(groupRef.current.rotation.y, lockedRotY, delta * 4)
       groupRef.current.rotation.z = MathUtils.lerp(groupRef.current.rotation.z, lockedRotZ, delta * 4)
+      if (lidRef.current) {
+        lidRef.current.rotation.x = MathUtils.lerp(lidRef.current.rotation.x, -0.38, delta * 3.2)
+      }
       return
     }
 
@@ -157,8 +224,9 @@ function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     const targetZPos = MathUtils.lerp(0.72, 0.06 - overshoot * 0.3, cinematicReveal)
 
     const openRotationX = MathUtils.lerp(0.72, 0.05 + overshoot * 0.1, cinematicReveal)
-    const openRotationY = MathUtils.lerp(baseYaw + 1.02, baseYaw - overshoot * 0.14, cinematicReveal)
+    const openRotationY = MathUtils.lerp(facingYaw + 1.02, facingYaw - overshoot * 0.14, cinematicReveal)
     const openRotationZ = MathUtils.lerp(-0.2, 0 + overshoot * 0.06, cinematicReveal)
+    const lidOpenX = MathUtils.lerp(-1.12, -0.38, cinematicReveal)
 
     const pointerX = hovered ? state.pointer.y * 0.08 : 0
     const pointerY = hovered ? state.pointer.x * 0.12 : 0
@@ -169,6 +237,9 @@ function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
     groupRef.current.rotation.x = MathUtils.lerp(groupRef.current.rotation.x, openRotationX + pointerX, delta * 2.2)
     groupRef.current.rotation.y = MathUtils.lerp(groupRef.current.rotation.y, openRotationY + pointerY, delta * 2.2)
     groupRef.current.rotation.z = MathUtils.lerp(groupRef.current.rotation.z, openRotationZ, delta * 2.2)
+    if (lidRef.current) {
+      lidRef.current.rotation.x = MathUtils.lerp(lidRef.current.rotation.x, lidOpenX, delta * 2.8)
+    }
   })
 
   return (
@@ -178,7 +249,7 @@ function LaptopDevice({ isLite, scrollProgress }: Omit<DeviceProps, 'accent'>) {
       onPointerLeave={() => setHovered(false)}
       position={[-5.8, 0.58, 0.72]}
     >
-      <primitive object={model} rotation={[0, Math.PI, 0]} />
+      <primitive object={riggedModel} rotation={[0, Math.PI, 0]} />
     </group>
   )
 }
