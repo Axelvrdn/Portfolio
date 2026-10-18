@@ -3,30 +3,374 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import { projects } from '../content/projects'
 ---
 <BaseLayout>
-  <header class="site-header">
-    <a class="wordmark" href="/">AXEL VERDON <span>INGÉNIEUR LOGICIEL</span></a>
-    <nav aria-label="Navigation principale"><a href="#travaux">Travaux</a><a href="#methode">Méthode</a><a href="#contact">Contact</a></nav>
-  </header>
-  <main id="contenu">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="kicker">Lille · conception · architecture · livraison</p>
-        <h1 id="hero-title">Je construis des produits qui tiennent debout.</h1>
-        <p class="hero-lead">Ingénieur logiciel, je transforme une intention en système utile : une interface claire, une architecture compréhensible et une mise en production assumée.</p>
-        <a class="hero-link" href="#travaux">Voir les travaux <span>↓</span></a>
+  <!-- Background Blueprint Architectural Grid -->
+  <div class="blueprint-grid" aria-hidden="true"></div>
+  <div class="blueprint-lines" aria-hidden="true">
+    <span class="grid-line grid-line-v left"></span>
+    <span class="grid-line grid-line-v right"></span>
+    <span class="grid-line grid-line-h top"></span>
+    <span class="grid-line grid-line-h bottom"></span>
+  </div>
+
+  <div class="agora-viewport">
+    <!-- Top HUD Navigation -->
+    <header class="agora-hud-header">
+      <div class="hud-brand">
+        <a class="brand-title" href="/">AXEL VERDON</a>
+        <span class="brand-subtitle">INGÉNIEUR LOGICIEL · ARCH // 2026</span>
       </div>
-      <div class="hero-figure" aria-label="Motif graphique inspiré d’un plan architectural grec">
-        <div class="sun-disc"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="figure-caption">ATELIER / 2026</div>
+
+      <div class="hud-center-status" aria-hidden="true">
+        <span class="status-dot"></span>
+        <span class="status-code">DISPONIBLE · STAGING PC-LAB</span>
       </div>
-    </section>
-    <section id="travaux" class="work-section" aria-labelledby="work-title">
-      <div class="section-intro"><p class="kicker">01 — Travaux sélectionnés</p><h2 id="work-title">Des systèmes, pas des vitrines.</h2><p>Chaque projet part d’une contrainte réelle et se raconte par les décisions qui l’ont rendu possible.</p></div>
-      <div class="project-list">
-        {projects.map((project) => <a class={`project-row ${project.accent}`} href={`/work/${project.slug}`}><span class="project-number">{project.number}</span><span class="project-main"><span class="project-year">{project.year} · {project.category}</span><strong>{project.title}</strong><span>{project.thesis}</span></span><span class="project-arrow">↗</span></a>)}
+
+      <nav class="hud-nav" aria-label="Navigation principale">
+        <a class="nav-item active" href="#travaux">
+          <span class="nav-num">I</span>
+          <span class="nav-label">PROJETS</span>
+        </a>
+        <a class="nav-item" href="#agora">
+          <span class="nav-num">II</span>
+          <span class="nav-label">AGORA</span>
+        </a>
+        <a class="nav-item" href="#methode">
+          <span class="nav-num">III</span>
+          <span class="nav-label">ARÊTE</span>
+        </a>
+        <a class="nav-item" href="#contact">
+          <span class="nav-num">IV</span>
+          <span class="nav-label">CONTACT</span>
+        </a>
+      </nav>
+    </header>
+
+    <main id="contenu">
+      <!-- HERO HUD SECTION (AEngel-like architecture + Greek Agora) -->
+      <section class="hero-stage" aria-labelledby="hero-main-title">
+        <div class="hero-meta-hud" aria-hidden="true">
+          <span class="hud-tag">EDITION 01</span>
+          <span class="hud-tag">LILLE · GRECE ANTIQUE DA</span>
+          <span class="hud-tag">ATELIER // ARCHITECTURE</span>
+        </div>
+
+        <div class="hero-center-monument">
+          <span class="monument-kicker">CONCEVOIR · BÂTIR · LIVRER</span>
+          <h1 id="hero-main-title" class="monument-title">
+            <span class="title-row">L’IDÉE</span>
+            <span class="title-row accent-terracotta">LE SYSTÈME</span>
+            <span class="title-row">LE RÉEL</span>
+          </h1>
+          <p class="monument-lead">
+            Ingénieur logiciel, je conçois des systèmes utiles et performants, du premier schéma d’architecture jusqu’à la livraison éprouvée en production.
+          </p>
+          <div class="monument-actions">
+            <a class="btn-primary" href="#travaux">
+              <span>EXPLORER LES TRAVAUX</span>
+              <span class="btn-arrow">↓</span>
+            </a>
+            <a class="btn-secondary" href="mailto:axel.v3rd0n@gmail.com">
+              <span>ENTRER EN CONTACT</span>
+              <span class="btn-arrow">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Side: Interactive Architectural Artifact Frame (AEngel Ticket/Frame Motif) -->
+        <aside class="artifact-card" aria-label="Spécification de l’édition">
+          <div class="card-glass-header">
+            <span class="card-id">ARTEFACT // 001</span>
+            <span class="card-status-pill">ONLINE</span>
+          </div>
+          <div class="card-canvas-wrap">
+            <canvas id="hero-artifact-canvas" width="320" height="320" aria-label="Visualiseur 3D interactif"></canvas>
+            <div class="card-wireframe-overlay" aria-hidden="true">
+              <span class="cross cross-tl">+</span>
+              <span class="cross cross-tr">+</span>
+              <span class="cross cross-bl">+</span>
+              <span class="cross cross-br">+</span>
+              <div class="ratio-badge">1.618 · PHI</div>
+            </div>
+          </div>
+          <div class="card-footer-meta">
+            <div class="meta-row">
+              <span class="meta-label">ARCHITECTURE</span>
+              <span class="meta-val">FULL-STACK CLOUD</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">CADRE</span>
+              <span class="meta-val">DOCKER · NGINX · ASTRO</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">ORIGINE</span>
+              <span class="meta-val">AXELVRDN // PORTFOLIO</span>
+            </div>
+          </div>
+        </aside>
+
+        <div class="hero-bottom-ticker" aria-hidden="true">
+          <span class="ticker-item">NUTRIFLOW [01]</span>
+          <span class="ticker-sep">/</span>
+          <span class="ticker-item">FOODCALL [02]</span>
+          <span class="ticker-sep">/</span>
+          <span class="ticker-item">HERMES WORKSTATION [03]</span>
+          <span class="ticker-sep">/</span>
+          <span class="ticker-item">PROPORTION · RIGUEUR · LIVRAISON</span>
+        </div>
+      </section>
+
+      <!-- PROJECTS CHRONICLE (AEngel Horizontal/Editorial Flow) -->
+      <section id="travaux" class="agora-section" aria-labelledby="section-travaux-title">
+        <div class="section-badge">
+          <span class="badge-num">01</span>
+          <span class="badge-line"></span>
+          <span class="badge-title">TRAVAUX SÉLECTIONNÉS</span>
+        </div>
+
+        <h2 id="section-travaux-title" class="section-monument-heading">
+          DES SYSTÈMES CONCRETS, PAS DES VITRINES.
+        </h2>
+        <p class="section-lead">
+          Chaque projet est traité comme un problème d’ingénierie complet : contrainte métier, architecture technique, expérience d’usage et mesure de succès.
+        </p>
+
+        <div class="chronicle-grid">
+          {projects.map((p) => (
+            <article class={`chronicle-card ${p.accent}`} id={p.slug}>
+              <div class="chronicle-header">
+                <span class="chronicle-num">{p.number}</span>
+                <span class="chronicle-year">{p.year} · {p.category}</span>
+                <span class="chronicle-tag">{p.accent.toUpperCase()}</span>
+              </div>
+              <div class="chronicle-body">
+                <h3 class="chronicle-title">{p.title}</h3>
+                <p class="chronicle-thesis">{p.thesis}</p>
+                <div class="chronicle-specs">
+                  <div class="spec-col">
+                    <span class="spec-label">RÔLE & FOCUS</span>
+                    <span class="spec-val">{p.role}</span>
+                  </div>
+                  <div class="spec-col">
+                    <span class="spec-label">CONTRAINTE MAJEURE</span>
+                    <span class="spec-val">{p.constraint}</span>
+                  </div>
+                  <div class="spec-col">
+                    <span class="spec-label">RÉSULTAT VÉRIFIÉ</span>
+                    <span class="spec-val">{p.outcome}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="chronicle-footer">
+                <div class="stack-pills">
+                  {p.stack.map((s) => (
+                    <span class="stack-pill">{s}</span>
+                  ))}
+                </div>
+                <a class="chronicle-link" href={`/work/${p.slug}`}>
+                  <span>ÉTUDE COMPLÈTE</span>
+                  <span class="arrow">↗</span>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- AGORA & METHOD (Arête & Athlète) -->
+      <section id="methode" class="agora-section" aria-labelledby="section-methode-title">
+        <div class="section-badge">
+          <span class="badge-num">02</span>
+          <span class="badge-line"></span>
+          <span class="badge-title">ARÊTE · LA DISCIPLINE DU GYMNASE</span>
+        </div>
+
+        <h2 id="section-methode-title" class="section-monument-heading">
+          LA MÉTHODE DE L’INGÉNIEUR ATHLÈTE.
+        </h2>
+
+        <div class="method-triptych">
+          <div class="triptych-panel">
+            <span class="panel-num">01</span>
+            <h3 class="panel-title">DISCIPLINE DU GESTE</h3>
+            <p class="panel-text">
+              Comme en volley-ball ou sous la barre de squat, la régularité bat l’intensité chaotique. Le code, les tests et l'architecture s'exécutent avec des routines mesurées chaque jour.
+            </p>
+            <div class="panel-stat">
+              <span class="stat-v">70 CM → 90 CM</span>
+              <span class="stat-l">DÉTENTE SÈCHE CIBLE</span>
+            </div>
+          </div>
+
+          <div class="triptych-panel">
+            <span class="panel-num">02</span>
+            <h3 class="panel-title">MESURE & FACTUALITÉ</h3>
+            <p class="panel-text">
+              Pas de narratif creux. Latence réseau, allocation mémoire, couverture de test et charge en production : tout choix technique est chiffré et défendable.
+            </p>
+            <div class="panel-stat">
+              <span class="stat-v">100+ KG</span>
+              <span class="stat-l">CHARGE DE BASE / SQUAT</span>
+            </div>
+          </div>
+
+          <div class="triptych-panel">
+            <span class="panel-num">03</span>
+            <h3 class="panel-title">LIVRAISON DU RÉEL</h3>
+            <p class="panel-text">
+              Un système n’a de valeur que lorsqu’il tourne devant de vrais utilisateurs. Du premier prototype local jusqu’au CDN Cloudflare, la boucle de feed-back reste courte.
+            </p>
+            <div class="panel-stat">
+              <span class="stat-v">100% AUDITÉ</span>
+              <span class="stat-l">DOCKER · WRANGLER PROD</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT AGORA -->
+      <section id="contact" class="agora-section contact-agora" aria-labelledby="section-contact-title">
+        <div class="section-badge">
+          <span class="badge-num">03</span>
+          <span class="badge-line"></span>
+          <span class="badge-title">COMMUNICATION</span>
+        </div>
+
+        <h2 id="section-contact-title" class="section-monument-heading">
+          INITIER LE DIALOGUE.
+        </h2>
+
+        <div class="contact-board">
+          <a class="contact-huge-link" href="mailto:axel.v3rd0n@gmail.com">
+            <span class="contact-email-text">axel.v3rd0n@gmail.com</span>
+            <span class="contact-arrow-huge">↗</span>
+          </a>
+
+          <div class="contact-sublinks">
+            <a class="sublink" href="https://github.com/Axelvrdn" target="_blank" rel="noopener noreferrer">
+              <span>GITHUB // AXELVRDN</span>
+              <span>↗</span>
+            </a>
+            <a class="sublink" href="https://www.linkedin.com/in/axel-verdon" target="_blank" rel="noopener noreferrer">
+              <span>LINKEDIN // AXEL VERDON</span>
+              <span>↗</span>
+            </a>
+            <span class="sublink-static">
+              <span>LOCALISATION // LILLE, FRANCE</span>
+              <span>●</span>
+            </span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="agora-footer">
+      <div class="footer-left">
+        <span>© 2026 AXEL VERDON</span>
+        <span class="footer-sep">·</span>
+        <span>AGORA NUMÉRIQUE ÉDITION 01</span>
       </div>
-    </section>
-    <section id="methode" class="method-section" aria-labelledby="method-title"><p class="kicker">02 — Méthode</p><h2 id="method-title">Proportion, preuve, progression.</h2><div class="method-grid"><p>Je préfère les systèmes lisibles aux effets qui masquent leur coût. Le mouvement sert à orienter, pas à ralentir.</p><p>Le portfolio est construit comme les produits qu’il présente : contenu d’abord, enhancement ensuite, limites visibles toujours.</p></div></section>
-    <section id="contact" class="contact-section" aria-labelledby="contact-title"><p class="kicker">03 — Contact</p><h2 id="contact-title">Une idée à mettre en œuvre ?</h2><a class="contact-link" href="mailto:axel.v3rd0n@gmail.com">axel.v3rd0n@gmail.com ↗</a></section>
-  </main>
-  <footer class="site-footer"><span>© 2026 Axel Verdon</span><span>Portfolio / édition 01</span></footer>
+      <div class="footer-right">
+        <span>ASTRO · THREE.JS · DOCKER · CLOUDFLARE</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Interactive 3D Wireframe Scene Script (Three.js procedural arch/icosahedron canvas) -->
+  <script>
+    import * as THREE from 'three'
+
+    function initArtifact() {
+      const canvas = document.getElementById('hero-artifact-canvas') as HTMLCanvasElement
+      if (!canvas) return
+
+      const scene = new THREE.Scene()
+      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
+      camera.position.set(0, 0, 4.5)
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true })
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+      renderer.setSize(320, 320)
+
+      // Ancient Greek Golden Ratio Monument wireframe (Golden Dodecahedron / Arch wireframe)
+      const group = new THREE.Group()
+
+      // Primary Geometric Core: Icosahedron with Wireframe geometry
+      const icoGeo = new THREE.IcosahedronGeometry(1.4, 1)
+      const wireGeo = new THREE.WireframeGeometry(icoGeo)
+      const lineMat = new THREE.LineBasicMaterial({
+        color: 0x0F4C81, // Aegean Blue
+        transparent: true,
+        opacity: 0.65,
+        linewidth: 1.5,
+      })
+      const wireframe = new THREE.LineSegments(wireGeo, lineMat)
+      group.add(wireframe)
+
+      // Inner Core: Terracotta solid accent
+      const innerGeo = new THREE.OctahedronGeometry(0.7, 0)
+      const innerMat = new THREE.MeshBasicMaterial({
+        color: 0xC85A32, // Terracotta
+        wireframe: true,
+        transparent: true,
+        opacity: 0.45,
+      })
+      const innerMesh = new THREE.Mesh(innerGeo, innerMat)
+      group.add(innerMesh)
+
+      // Orbit Ring (Bronze)
+      const ringGeo = new THREE.RingGeometry(1.9, 1.95, 48)
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: 0xB38646, // Bronze
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.4,
+      })
+      const ring = new THREE.Mesh(ringGeo, ringMat)
+      ring.rotation.x = Math.PI / 3
+      group.add(ring)
+
+      scene.add(group)
+
+      let mouseX = 0
+      let mouseY = 0
+      let targetX = 0
+      let targetY = 0
+
+      window.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect()
+        const cx = rect.left + rect.width / 2
+        const cy = rect.top + rect.height / 2
+        mouseX = (e.clientX - cx) * 0.0015
+        mouseY = (e.clientY - cy) * 0.0015
+      }, { passive: true })
+
+      let animId: number
+      const animate = () => {
+        animId = requestAnimationFrame(animate)
+        targetX += (mouseX - targetX) * 0.05
+        targetY += (mouseY - targetY) * 0.05
+
+        group.rotation.y += 0.006 + targetX * 0.04
+        group.rotation.x += 0.003 + targetY * 0.04
+        ring.rotation.z += 0.004
+
+        renderer.render(scene, camera)
+      }
+
+      // Check reduced motion
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        animate()
+      } else {
+        renderer.render(scene, camera)
+      }
+
+      return () => cancelAnimationFrame(animId)
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initArtifact)
+    } else {
+      initArtifact()
+    }
+  </script>
 </BaseLayout>
