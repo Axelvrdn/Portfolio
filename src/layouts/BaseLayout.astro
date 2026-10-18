@@ -1,0 +1,20 @@
+---
+import '../styles/global.css'
+
+interface Props { title?: string; description?: string }
+const { title = 'Axel Verdon — Ingénieur logiciel', description = 'Portfolio d’Axel Verdon, ingénieur logiciel orienté produit, architecture et livraison.' } = Astro.props
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f7f4ee" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+    <slot />
+  </body>
+</html>

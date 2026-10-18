@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { projects } from '../content/projects'
+---
+<BaseLayout>
+  <header class="site-header">
+    <a class="wordmark" href="/">AXEL VERDON <span>INGÉNIEUR LOGICIEL</span></a>
+    <nav aria-label="Navigation principale"><a href="#travaux">Travaux</a><a href="#methode">Méthode</a><a href="#contact">Contact</a></nav>
+  </header>
+  <main id="contenu">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="kicker">Lille · conception · architecture · livraison</p>
+        <h1 id="hero-title">Je construis des produits qui tiennent debout.</h1>
+        <p class="hero-lead">Ingénieur logiciel, je transforme une intention en système utile : une interface claire, une architecture compréhensible et une mise en production assumée.</p>
+        <a class="hero-link" href="#travaux">Voir les travaux <span>↓</span></a>
+      </div>
+      <div class="hero-figure" aria-label="Motif graphique inspiré d’un plan architectural grec">
+        <div class="sun-disc"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="figure-caption">ATELIER / 2026</div>
+      </div>
+    </section>
+    <section id="travaux" class="work-section" aria-labelledby="work-title">
+      <div class="section-intro"><p class="kicker">01 — Travaux sélectionnés</p><h2 id="work-title">Des systèmes, pas des vitrines.</h2><p>Chaque projet part d’une contrainte réelle et se raconte par les décisions qui l’ont rendu possible.</p></div>
+      <div class="project-list">
+        {projects.map((project) => <a class={`project-row ${project.accent}`} href={`/work/${project.slug}`}><span class="project-number">{project.number}</span><span class="project-main"><span class="project-year">{project.year} · {project.category}</span><strong>{project.title}</strong><span>{project.thesis}</span></span><span class="project-arrow">↗</span></a>)}
+      </div>
+    </section>
+    <section id="methode" class="method-section" aria-labelledby="method-title"><p class="kicker">02 — Méthode</p><h2 id="method-title">Proportion, preuve, progression.</h2><div class="method-grid"><p>Je préfère les systèmes lisibles aux effets qui masquent leur coût. Le mouvement sert à orienter, pas à ralentir.</p><p>Le portfolio est construit comme les produits qu’il présente : contenu d’abord, enhancement ensuite, limites visibles toujours.</p></div></section>
+    <section id="contact" class="contact-section" aria-labelledby="contact-title"><p class="kicker">03 — Contact</p><h2 id="contact-title">Une idée à mettre en œuvre ?</h2><a class="contact-link" href="mailto:axel.v3rd0n@gmail.com">axel.v3rd0n@gmail.com ↗</a></section>
+  </main>
+  <footer class="site-footer"><span>© 2026 Axel Verdon</span><span>Portfolio / édition 01</span></footer>
+</BaseLayout>
